@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://portfolio-chi-gules-53.vercel.app'),
+  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://seunlawal.dev'),
   title: 'Lawal A. Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
   description:
     'Full Stack Developer & Cybersecurity Enthusiast building exceptional web and mobile experiences. Specializing in React, Next.js, Node.js, and security-focused development.',
