@@ -51,7 +51,6 @@ const techIcons: Array<{
   { name: 'GitHub',       Icon: SiGithub,        color: '#ffffff' },
   { name: 'Linux / Kali', Icon: SiLinux,         color: '#fcc624' },
   { name: 'Figma',        Icon: SiFigma,         color: '#f24e1e' },
-  { name: 'AI Tools',     Icon: SiReact,         color: '#a78bfa' },
 ]
 
 export default function Skills() {
