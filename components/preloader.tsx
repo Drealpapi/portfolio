@@ -50,18 +50,13 @@ export default function Preloader() {
           >
             {/* Logo mark */}
             <div className="relative">
-              <div
-                className="w-16 h-16 hexagon flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
+              <motion.div
+                className="w-20 h-20 rounded-2xl overflow-hidden"
+                animate={{ boxShadow: ['0 0 0px rgba(249,115,22,0)', '0 0 30px rgba(249,115,22,0.4)', '0 0 0px rgba(249,115,22,0)'] }}
+                transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <span className="text-white font-black text-2xl" style={{ fontFamily: 'var(--font-poppins)' }}>
-                  L
-                </span>
-              </div>
-              <div
-                className="absolute inset-0 hexagon animate-pulse-glow"
-                style={{ background: 'rgba(249,115,22,0.2)', filter: 'blur(8px)' }}
-              />
+                <img src="/logo.png" alt="Lawal A. Oluwaseun" className="w-full h-full object-cover" />
+              </motion.div>
             </div>
 
             {/* Name */}
