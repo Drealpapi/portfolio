@@ -114,11 +114,8 @@ export default function ContactSection() {
           >
             {/* Avatar / brand */}
             <div className="flex items-center gap-4 mb-2">
-              <div
-                className="w-14 h-14 hexagon flex items-center justify-center"
-                style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
-              >
-                <span className="text-white font-black text-xl">L</span>
+              <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
+                <img src="/logo.png" alt="Lawal A. Oluwaseun" className="w-full h-full object-cover" />
               </div>
               <div>
                 <div className="text-white font-bold text-lg">Lawal A. Oluwaseun</div>

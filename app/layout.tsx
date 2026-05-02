@@ -26,6 +26,10 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://seunlawal.dev'
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
   title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+  icons: {
+    icon: '/logo.png',
+    apple: '/logo.png',
+  },
   description:
     'Lawal Abdulrahman Oluwaseun (Lawal A. Oluwaseun) — Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria. Building exceptional web and mobile experiences. Specializing in React, Next.js, Node.js, and security-focused development.',
   keywords: [

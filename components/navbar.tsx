@@ -51,14 +51,11 @@ export default function Navbar() {
             onClick={(e) => { e.preventDefault(); handleNav('Home', '#home') }}
             whileHover={{ scale: 1.02 }}
           >
-            <div
-              className="w-10 h-10 hexagon flex items-center justify-center relative"
-              style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
-            >
-              <span className="text-white font-black text-lg relative z-10">L</span>
+            <div className="w-10 h-10 rounded-xl overflow-hidden flex items-center justify-center relative">
+              <img src="/logo.png" alt="Lawal A. Oluwaseun" className="w-full h-full object-cover" />
               <div
-                className="absolute inset-0 hexagon opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: 'rgba(249,115,22,0.3)', filter: 'blur(6px)' }}
+                className="absolute inset-0 rounded-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: 'rgba(249,115,22,0.15)' }}
               />
             </div>
             <div>

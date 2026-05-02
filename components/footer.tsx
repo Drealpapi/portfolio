@@ -51,11 +51,8 @@ export default function Footer() {
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
           >
-            <div
-              className="w-9 h-9 hexagon flex items-center justify-center"
-              style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
-            >
-              <span className="text-white font-black text-base">L</span>
+            <div className="w-9 h-9 rounded-xl overflow-hidden flex-shrink-0">
+              <img src="/logo.png" alt="Lawal A. Oluwaseun" className="w-full h-full object-cover" />
             </div>
             <div>
               <span className="text-white font-bold text-base">Lawal A. Oluwaseun</span>
