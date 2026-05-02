@@ -21,36 +21,82 @@ export const viewport: Viewport = {
   maximumScale: 1,
 }
 
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://seunlawal.dev'
+
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://seunlawal.dev'),
-  title: 'Lawal A. Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+  metadataBase: new URL(siteUrl),
+  title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
   description:
-    'Full Stack Developer & Cybersecurity Enthusiast building exceptional web and mobile experiences. Specializing in React, Next.js, Node.js, and security-focused development.',
+    'Lawal Abdulrahman Oluwaseun (Lawal A. Oluwaseun) — Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria. Building exceptional web and mobile experiences. Specializing in React, Next.js, Node.js, and security-focused development.',
   keywords: [
-    'full stack developer',
-    'cybersecurity',
-    'web development',
-    'React',
-    'Next.js',
-    'TypeScript',
+    'Lawal Abdulrahman Oluwaseun',
+    'Lawal A. Oluwaseun',
     'Lawal Oluwaseun',
-    'Lagos Nigeria',
+    'Oluwaseun Lawal',
+    'Seun Lawal',
+    'seunlawal',
+    'full stack developer Nigeria',
+    'cybersecurity enthusiast Lagos',
+    'web developer Lagos Nigeria',
+    'React developer Nigeria',
+    'Next.js developer',
+    'TypeScript developer',
+    'blockchain security',
+    'seunlawal.dev',
   ],
-  authors: [{ name: 'Lawal Abdulrahman Oluwaseun' }],
+  authors: [{ name: 'Lawal Abdulrahman Oluwaseun', url: siteUrl }],
+  creator: 'Lawal Abdulrahman Oluwaseun',
   openGraph: {
-    type: 'website',
+    type: 'profile',
     locale: 'en_US',
-    title: 'Lawal A. Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+    url: siteUrl,
+    title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
     description:
-      'Full Stack Developer & Cybersecurity Enthusiast building exceptional digital products.',
-    siteName: 'Lawal A. Oluwaseun Portfolio',
+      'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
+    siteName: 'Lawal Abdulrahman Oluwaseun',
+    images: [
+      {
+        url: '/profile.png',
+        width: 800,
+        height: 800,
+        alt: 'Lawal Abdulrahman Oluwaseun',
+      },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lawal A. Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+    title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
     description:
-      'Full Stack Developer & Cybersecurity Enthusiast building exceptional digital products.',
+      'Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
+    images: ['/profile.png'],
   },
+}
+
+// JSON-LD structured data — tells Google who you are with photo
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: 'Lawal Abdulrahman Oluwaseun',
+  alternateName: ['Lawal A. Oluwaseun', 'Lawal Oluwaseun', 'Oluwaseun Lawal', 'Seun Lawal'],
+  url: siteUrl,
+  image: `${siteUrl}/profile.png`,
+  jobTitle: 'Full Stack Developer & Cybersecurity Enthusiast',
+  worksFor: {
+    '@type': 'Organization',
+    name: 'Eleaders Network',
+  },
+  address: {
+    '@type': 'PostalAddress',
+    addressLocality: 'Lagos',
+    addressCountry: 'Nigeria',
+  },
+  email: 'seunlawal18@gmail.com',
+  sameAs: [
+    'https://www.linkedin.com/in/lawal-oluwaseun-370a42268',
+    'https://github.com/Drealpapi',
+    'https://www.tiktok.com/@drealpapie',
+    'https://medium.com/@seunlawal18',
+  ],
 }
 
 export default function RootLayout({
@@ -63,6 +109,12 @@ export default function RootLayout({
       lang="en"
       className={`scroll-smooth ${poppins.variable} ${inter.variable}`}
     >
+      <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
+      </head>
       <body
         className="antialiased"
         style={{ fontFamily: 'var(--font-poppins), var(--font-inter), sans-serif' }}
