@@ -116,10 +116,6 @@ export default function Footer() {
             <Heart size={11} className="text-orange-400 fill-orange-400" /> in Nigeria.
           </p>
 
-          <p className="text-xs text-white/20">
-            Built with Next.js · Tailwind CSS · Framer Motion
-          </p>
-
           {/* Back to top */}
           <motion.button
             onClick={scrollTop}
