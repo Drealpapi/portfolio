@@ -15,6 +15,8 @@ import {
   SiPython,
   SiMongodb,
   SiSolidity,
+  SiFlutter,
+  SiFirebase,
 } from 'react-icons/si'
 
 function ReactNativeIcon({ size = 30, color = '#61dafb' }: { size?: number; color?: string }) {
@@ -47,6 +49,8 @@ const techIcons: Array<{
   { name: 'Node.js',      Icon: SiNodedotjs,     color: '#6cc24a' },
   { name: 'Python',       Icon: SiPython,        color: '#3776ab' },
   { name: 'MongoDB',      Icon: SiMongodb,       color: '#47a248' },
+  { name: 'Firebase',     Icon: SiFirebase,      color: '#ffca28' },
+  { name: 'Flutter',      Icon: SiFlutter,       color: '#54c5f8' },
   { name: 'Solidity',     Icon: SiSolidity,      color: '#a0aec0' },
   { name: 'GitHub',       Icon: SiGithub,        color: '#ffffff' },
   { name: 'Linux / Kali', Icon: SiLinux,         color: '#fcc624' },
@@ -99,7 +103,7 @@ export default function Skills() {
 
         {/* Icon grid */}
         <motion.div
-          className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-7 gap-6 justify-items-center"
+          className="grid grid-cols-4 sm:grid-cols-5 md:grid-cols-5 lg:grid-cols-5 gap-8 justify-items-center max-w-3xl mx-auto"
           initial={{ opacity: 0 }}
           animate={inView ? { opacity: 1 } : {}}
           transition={{ duration: 0.5, delay: 0.2 }}

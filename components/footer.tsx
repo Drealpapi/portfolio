@@ -56,7 +56,7 @@ export default function Footer() {
             </div>
             <div>
               <span className="text-white font-bold text-base">Lawal A. Oluwaseun</span>
-              <div className="text-[10px] text-orange-400/60 tracking-[0.15em] uppercase">Full Stack Dev & Cybersecurity</div>
+              <div className="text-[10px] text-orange-400/60 tracking-[0.15em] uppercase">Senior Full Stack Dev · Cybersecurity</div>
             </div>
           </motion.div>
 

@@ -7,19 +7,62 @@ import { ExternalLink, Github, ArrowUpRight, BookOpen } from 'lucide-react'
 const projects = [
   {
     id: 1,
+    title: 'AMMC Builders Liability Insurance Platform',
+    category: 'Insurance & Compliance',
+    description:
+      'A modern web-based insurance and compliance platform streamlining the Builders Liability Insurance process for construction projects. Provides a centralized digital experience for stakeholders to submit, manage, verify, and track insurance policies — improving transparency and regulatory compliance.',
+    tech: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'Tailwind'],
+    color: '#f97316',
+    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.18) 0%, rgba(234,88,12,0.06) 100%)',
+    live: '',
+    github: '',
+    article: '',
+    badge: 'Featured',
+  },
+  {
+    id: 2,
+    title: 'GETEASY',
+    category: 'Service Aggregator',
+    description:
+      'A platform connecting service providers with users seeking on-demand services. Focused on system architecture, user flow, and matching logic between providers and clients. Simplifying service discovery with a mobile-friendly interface and scalable backend.',
+    tech: ['React Native', 'Node.js', 'MongoDB'],
+    color: '#fb923c',
+    gradient: 'linear-gradient(135deg, rgba(251,146,60,0.1) 0%, rgba(249,115,22,0.03) 100%)',
+    live: '',
+    github: 'https://github.com/Drealpapi/GetEasy',
+    article: '',
+    badge: '',
+  },
+  {
+    id: 3,
+    title: 'FutureFest',
+    category: 'Events Platform',
+    description:
+      'A web platform for artists to promote and manage upcoming live events. Focused on UI design, event discovery experience, and audience engagement. Features event listing, promotion, and interactive browsing.',
+    tech: ['React', 'Next.js', 'Tailwind'],
+    color: '#f97316',
+    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(251,146,60,0.04) 100%)',
+    live: 'https://v0-futurefest-clone.vercel.app/',
+    github: 'https://github.com/Drealpapi',
+    article: '',
+    badge: '',
+  },
+  {
+    id: 4,
     title: 'ClipClip',
     category: 'Security Research',
     description:
-      'Documented and demonstrated a clipboard hijacking attack targeting cryptocurrency addresses. The tool detects wallet address prefixes (e.g. bc1) and silently swaps them — exploiting the fact that victims rarely verify all 26–35 characters. Published as a security awareness writeup.',
+      'Documented and demonstrated a clipboard hijacking attack targeting cryptocurrency addresses. The tool detects wallet address prefixes (e.g. bc1) and silently swaps them — exploiting the fact that victims rarely verify all characters. Published as a security awareness writeup.',
     tech: ['Python', 'Cybersecurity', 'Blockchain', 'Security Research'],
     color: '#f97316',
     gradient: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.05) 100%)',
     live: '',
     github: '',
     article: 'https://medium.com/@seunlawal18/how-clipboard-hijacking-silently-steals-crypto-and-why-youll-never-notice-f37cc3baef13',
+    badge: '',
   },
   {
-    id: 2,
+    id: 5,
     title: 'DripBox.ng',
     category: 'E-Commerce Platform',
     description:
@@ -30,32 +73,7 @@ const projects = [
     live: '',
     github: '',
     article: '',
-  },
-  {
-    id: 3,
-    title: 'FutureFestcln',
-    category: 'Events Platform',
-    description:
-      'A web platform for artists to promote and manage upcoming live events. Focused on UI design, event discovery, and audience engagement. Currently in prototype stage with ongoing feature development.',
-    tech: ['React', 'Next.js', 'Tailwind'],
-    color: '#f97316',
-    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(251,146,60,0.04) 100%)',
-    live: 'https://v0-futurefest-clone.vercel.app/',
-    github: 'https://github.com/Drealpapi',
-    article: '',
-  },
-  {
-    id: 4,
-    title: 'GETEASY',
-    category: 'Service Aggregator',
-    description:
-      'A platform connecting service providers with users seeking on-demand services. Working on system architecture, user flow, and matching logic. Focused on simplifying service discovery and accessibility.',
-    tech: ['React Native', 'Node.js', 'MongoDB'],
-    color: '#fb923c',
-    gradient: 'linear-gradient(135deg, rgba(251,146,60,0.1) 0%, rgba(249,115,22,0.03) 100%)',
-    live: '',
-    github: 'https://github.com/Drealpapi/GetEasy',
-    article: '',
+    badge: '',
   },
 ]
 
@@ -73,7 +91,7 @@ function ProjectCard({
       className="group relative rounded-2xl overflow-hidden"
       style={{
         background: project.gradient,
-        border: '1px solid rgba(249,115,22,0.1)',
+        border: index === 0 ? '1px solid rgba(249,115,22,0.28)' : '1px solid rgba(249,115,22,0.1)',
       }}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
@@ -104,16 +122,29 @@ function ProjectCard({
       <div className="p-6 lg:p-7">
         {/* Category */}
         <div className="flex items-center justify-between mb-4">
-          <span
-            className="text-xs font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full"
-            style={{
-              background: 'rgba(249,115,22,0.1)',
-              color: '#f97316',
-              border: '1px solid rgba(249,115,22,0.2)',
-            }}
-          >
-            {project.category}
-          </span>
+          <div className="flex items-center gap-2">
+            <span
+              className="text-xs font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full"
+              style={{
+                background: 'rgba(249,115,22,0.1)',
+                color: '#f97316',
+                border: '1px solid rgba(249,115,22,0.2)',
+              }}
+            >
+              {project.category}
+            </span>
+            {project.badge && (
+              <span
+                className="text-xs font-bold tracking-wide px-2.5 py-1 rounded-full"
+                style={{
+                  background: 'rgba(249,115,22,0.9)',
+                  color: '#fff',
+                }}
+              >
+                {project.badge}
+              </span>
+            )}
+          </div>
           <motion.div
             className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
             whileHover={{ rotate: 45 }}
@@ -204,7 +235,7 @@ function ProjectCard({
                 color: 'rgba(255,255,255,0.2)',
               }}
             >
-              No longer active
+              In development
             </div>
           )}
         </div>
@@ -272,7 +303,12 @@ export default function Projects() {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
           {projects.map((project, i) => (
-            <ProjectCard key={project.id} project={project} index={i} />
+            <div
+              key={project.id}
+              className={i === 0 ? 'md:col-span-2 lg:col-span-3' : ''}
+            >
+              <ProjectCard project={project} index={i} />
+            </div>
           ))}
         </div>
       </div>

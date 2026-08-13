@@ -119,7 +119,7 @@ export default function ContactSection() {
               </div>
               <div>
                 <div className="text-white font-bold text-lg">Lawal A. Oluwaseun</div>
-                <div className="text-orange-400 text-sm">Full Stack Dev & Cybersecurity Enthusiast</div>
+                <div className="text-orange-400 text-sm">Senior Full Stack Dev & Cybersecurity Enthusiast</div>
               </div>
             </div>
 

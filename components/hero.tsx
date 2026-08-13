@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useRef, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
 import { Github, Linkedin, ChevronDown, Download } from 'lucide-react'
 import FloatingShapes from './floating-shapes'
@@ -13,171 +13,13 @@ function TikTokIcon({ size = 15, color = 'currentColor' }: { size?: number; colo
   )
 }
 
-const roles = ['Full Stack Developer', 'Cybersecurity Enthusiast', 'React Specialist', 'Problem Solver']
+const roles = ['Senior Full Stack Developer', 'Cybersecurity Enthusiast', 'React & React Native Dev', 'Problem Solver']
 
 const socialLinks = [
   { icon: Github, href: 'https://github.com/Drealpapi', label: 'GitHub' },
   { icon: Linkedin, href: 'https://www.linkedin.com/in/lawal-oluwaseun-370a42268', label: 'LinkedIn' },
   { icon: TikTokIcon, href: 'https://www.tiktok.com/@drealpapie', label: 'TikTok' },
 ]
-
-function DeveloperIllustration() {
-  return (
-    <motion.div
-      className="relative w-full max-w-lg mx-auto"
-      initial={{ opacity: 0, scale: 0.8, y: 40 }}
-      animate={{ opacity: 1, scale: 1, y: 0 }}
-      transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-    >
-      {/* Outer glow ring */}
-      <motion.div
-        className="absolute inset-0 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%)',
-          filter: 'blur(30px)',
-        }}
-        animate={{ scale: [1, 1.1, 1], opacity: [0.6, 1, 0.6] }}
-        transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
-      />
-
-      {/* Main illustration container */}
-      <motion.div
-        className="relative z-10"
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-      >
-        {/* SVG Developer Character */}
-        <svg viewBox="0 0 400 420" fill="none" xmlns="http://www.w3.org/2000/svg" className="w-full">
-          {/* Glow behind character */}
-          <ellipse cx="200" cy="380" rx="120" ry="20" fill="rgba(249,115,22,0.15)" />
-
-          {/* Body */}
-          <rect x="140" y="200" width="120" height="130" rx="20" fill="#1a1a1a" />
-          <rect x="140" y="200" width="120" height="130" rx="20" fill="url(#bodyGrad)" />
-
-          {/* Hoodie details */}
-          <path d="M140 220 Q200 240 260 220" stroke="rgba(249,115,22,0.3)" strokeWidth="1.5" fill="none" />
-          <rect x="185" y="200" width="30" height="25" rx="5" fill="#111" />
-
-          {/* Head */}
-          <circle cx="200" cy="160" r="55" fill="#2a2a2a" />
-          <circle cx="200" cy="160" r="55" fill="url(#headGrad)" />
-
-          {/* Face */}
-          <circle cx="183" cy="158" r="8" fill="#111" />
-          <circle cx="217" cy="158" r="8" fill="#111" />
-          <circle cx="185" cy="156" r="3" fill="white" opacity="0.8" />
-          <circle cx="219" cy="156" r="3" fill="white" opacity="0.8" />
-          {/* Smile */}
-          <path d="M188 172 Q200 182 212 172" stroke="rgba(249,115,22,0.8)" strokeWidth="2.5" fill="none" strokeLinecap="round" />
-
-          {/* Headphones */}
-          <path d="M148 155 Q148 105 200 105 Q252 105 252 155" stroke="#f97316" strokeWidth="6" fill="none" strokeLinecap="round" />
-          <rect x="138" y="148" width="18" height="28" rx="9" fill="#f97316" />
-          <rect x="244" y="148" width="18" height="28" rx="9" fill="#f97316" />
-          <rect x="140" y="152" width="14" height="20" rx="7" fill="#ea580c" />
-          <rect x="246" y="152" width="14" height="20" rx="7" fill="#ea580c" />
-
-          {/* Arms */}
-          {/* Left arm */}
-          <path d="M140 220 Q100 250 90 290" stroke="#2a2a2a" strokeWidth="28" strokeLinecap="round" fill="none" />
-          <path d="M140 220 Q100 250 90 290" stroke="url(#armGrad)" strokeWidth="26" strokeLinecap="round" fill="none" />
-          {/* Right arm */}
-          <path d="M260 220 Q300 250 310 290" stroke="#2a2a2a" strokeWidth="28" strokeLinecap="round" fill="none" />
-          <path d="M260 220 Q300 250 310 290" stroke="url(#armGrad)" strokeWidth="26" strokeLinecap="round" fill="none" />
-
-          {/* Laptop */}
-          <rect x="80" y="285" width="240" height="5" rx="2.5" fill="#333" />
-          <rect x="95" y="220" width="210" height="140" rx="12" fill="#111" />
-          <rect x="95" y="220" width="210" height="140" rx="12" fill="url(#laptopGrad)" />
-          <rect x="100" y="225" width="200" height="130" rx="10" fill="#0a0a0a" />
-
-          {/* Screen content */}
-          <rect x="110" y="235" width="80" height="8" rx="4" fill="rgba(249,115,22,0.6)" />
-          <rect x="110" y="250" width="120" height="5" rx="2.5" fill="rgba(255,255,255,0.15)" />
-          <rect x="110" y="262" width="100" height="5" rx="2.5" fill="rgba(255,255,255,0.1)" />
-          <rect x="110" y="274" width="140" height="5" rx="2.5" fill="rgba(249,115,22,0.3)" />
-          <rect x="110" y="286" width="90" height="5" rx="2.5" fill="rgba(255,255,255,0.1)" />
-          <rect x="110" y="298" width="110" height="5" rx="2.5" fill="rgba(255,255,255,0.08)" />
-          <rect x="110" y="310" width="130" height="5" rx="2.5" fill="rgba(249,115,22,0.2)" />
-          <rect x="110" y="322" width="70" height="5" rx="2.5" fill="rgba(255,255,255,0.1)" />
-
-          {/* Cursor blink */}
-          <motion.rect
-            x="182"
-            y="235"
-            width="3"
-            height="8"
-            rx="1.5"
-            fill="#f97316"
-            animate={{ opacity: [1, 0, 1] }}
-            transition={{ duration: 1, repeat: Infinity }}
-          />
-
-          {/* Legs */}
-          <path d="M165 330 Q155 370 150 400" stroke="#1a1a1a" strokeWidth="30" strokeLinecap="round" fill="none" />
-          <path d="M235 330 Q245 370 250 400" stroke="#1a1a1a" strokeWidth="30" strokeLinecap="round" fill="none" />
-          {/* Shoes */}
-          <ellipse cx="148" cy="402" rx="22" ry="10" fill="#111" />
-          <ellipse cx="252" cy="402" rx="22" ry="10" fill="#111" />
-
-          {/* Floating code snippets */}
-          <motion.g
-            animate={{ y: [0, -8, 0], opacity: [0.7, 1, 0.7] }}
-            transition={{ duration: 3, repeat: Infinity, delay: 0.5 }}
-          >
-            <rect x="290" y="140" width="90" height="50" rx="10" fill="rgba(20,20,20,0.9)" stroke="rgba(249,115,22,0.3)" strokeWidth="1" />
-            <text x="300" y="158" fill="#f97316" fontSize="9" fontFamily="monospace">const dev =</text>
-            <text x="300" y="172" fill="rgba(255,255,255,0.6)" fontSize="9" fontFamily="monospace">  &quot;awesome&quot;</text>
-          </motion.g>
-
-          <motion.g
-            animate={{ y: [0, -10, 0], opacity: [0.6, 1, 0.6] }}
-            transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-          >
-            <rect x="20" y="160" width="80" height="40" rx="10" fill="rgba(20,20,20,0.9)" stroke="rgba(249,115,22,0.3)" strokeWidth="1" />
-            <text x="30" y="178" fill="#f97316" fontSize="9" fontFamily="monospace">&lt;React /&gt;</text>
-            <text x="30" y="192" fill="rgba(255,255,255,0.5)" fontSize="9" fontFamily="monospace">Next.js</text>
-          </motion.g>
-
-          {/* Gradients */}
-          <defs>
-            <linearGradient id="bodyGrad" x1="140" y1="200" x2="260" y2="330" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#2a2a2a" />
-              <stop offset="100%" stopColor="#1a1a1a" />
-            </linearGradient>
-            <linearGradient id="headGrad" x1="145" y1="105" x2="255" y2="215" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="#3a3a3a" />
-              <stop offset="100%" stopColor="#222" />
-            </linearGradient>
-            <linearGradient id="armGrad" x1="0" y1="0" x2="0" y2="1" gradientUnits="objectBoundingBox">
-              <stop offset="0%" stopColor="#2a2a2a" />
-              <stop offset="100%" stopColor="#1a1a1a" />
-            </linearGradient>
-            <linearGradient id="laptopGrad" x1="95" y1="220" x2="305" y2="360" gradientUnits="userSpaceOnUse">
-              <stop offset="0%" stopColor="rgba(249,115,22,0.05)" />
-              <stop offset="100%" stopColor="transparent" />
-            </linearGradient>
-          </defs>
-        </svg>
-      </motion.div>
-
-      {/* Orbiting elements */}
-      <motion.div
-        className="absolute top-8 right-4 w-12 h-12 hexagon"
-        style={{ background: 'linear-gradient(135deg, #f97316, #ea580c)' }}
-        animate={{ rotate: 360, y: [0, -10, 0] }}
-        transition={{ rotate: { duration: 8, repeat: Infinity, ease: 'linear' }, y: { duration: 3, repeat: Infinity } }}
-      />
-      <motion.div
-        className="absolute bottom-16 left-4 w-8 h-8 hexagon"
-        style={{ background: 'rgba(249,115,22,0.4)' }}
-        animate={{ rotate: -360, y: [0, 10, 0] }}
-        transition={{ rotate: { duration: 6, repeat: Infinity, ease: 'linear' }, y: { duration: 4, repeat: Infinity } }}
-      />
-    </motion.div>
-  )
-}
 
 export default function Hero() {
   const [roleIndex, setRoleIndex] = useState(0)
@@ -327,10 +169,10 @@ export default function Hero() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.65, duration: 0.6 }}
               >
-                Crafting pixel-perfect digital experiences that blend{' '}
-                <span className="text-orange-400 font-medium">elegant design</span> with{' '}
-                <span className="text-orange-400 font-medium">cybersecurity awareness</span>.
-                Turning ideas into reality, one line at a time.
+                Building modern web &amp; mobile apps across{' '}
+                <span className="text-orange-400 font-medium">insurance, fintech, and service platforms</span>{' '}
+                — with{' '}
+                <span className="text-orange-400 font-medium">cybersecurity</span> at the core.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -374,9 +216,29 @@ export default function Hero() {
                 </motion.a>
               </motion.div>
 
+              {/* Currently working on badge */}
+              <motion.div
+                className="flex items-center gap-2 mb-8"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.95, duration: 0.5 }}
+              >
+                <span
+                  className="inline-flex items-center gap-2 text-xs px-3 py-1.5 rounded-full font-medium"
+                  style={{
+                    background: 'rgba(249,115,22,0.1)',
+                    border: '1px solid rgba(249,115,22,0.25)',
+                    color: '#fb923c',
+                  }}
+                >
+                  <span className="w-1.5 h-1.5 rounded-full bg-orange-400 animate-pulse" />
+                  Currently working on: AMMC Insurance Platform
+                </span>
+              </motion.div>
+
               {/* Stats */}
               <motion.div
-                className="flex gap-8 mt-10 pt-8"
+                className="flex gap-8 mt-2 pt-8"
                 style={{ borderTop: '1px solid rgba(255,255,255,0.06)' }}
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
@@ -384,8 +246,8 @@ export default function Hero() {
               >
                 {[
                   { value: '3+', label: 'Years Exp.' },
-                  { value: '20+', label: 'Projects' },
-                  { value: '10+', label: 'Clients' },
+                  { value: '5+', label: 'Projects' },
+                  { value: '3+', label: 'Organisations' },
                 ].map((stat) => (
                   <div key={stat.label}>
                     <div className="text-2xl font-black gradient-text">{stat.value}</div>
@@ -396,10 +258,111 @@ export default function Hero() {
             </div>
           </div>
 
-          {/* Right — Illustration */}
-          <div className="flex items-center justify-center">
-            <DeveloperIllustration />
-          </div>
+          {/* Right — Profile Photo */}
+          <motion.div
+            className="flex items-center justify-center"
+            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
+          >
+            <div className="relative w-full max-w-sm mx-auto">
+              {/* Outer glow */}
+              <div
+                className="absolute inset-0 rounded-3xl pointer-events-none"
+                style={{
+                  background: 'radial-gradient(circle, rgba(249,115,22,0.18) 0%, transparent 70%)',
+                  filter: 'blur(40px)',
+                  transform: 'scale(1.1)',
+                }}
+              />
+
+              {/* Decorative corner brackets */}
+              <div
+                className="absolute -top-3 -left-3 w-10 h-10 pointer-events-none"
+                style={{
+                  borderTop: '2px solid #f97316',
+                  borderLeft: '2px solid #f97316',
+                  borderRadius: '4px 0 0 0',
+                }}
+              />
+              <div
+                className="absolute -bottom-3 -right-3 w-10 h-10 pointer-events-none"
+                style={{
+                  borderBottom: '2px solid #f97316',
+                  borderRight: '2px solid #f97316',
+                  borderRadius: '0 0 4px 0',
+                }}
+              />
+              <div
+                className="absolute -top-3 -right-3 w-10 h-10 pointer-events-none"
+                style={{
+                  borderTop: '2px solid rgba(249,115,22,0.3)',
+                  borderRight: '2px solid rgba(249,115,22,0.3)',
+                  borderRadius: '0 4px 0 0',
+                }}
+              />
+              <div
+                className="absolute -bottom-3 -left-3 w-10 h-10 pointer-events-none"
+                style={{
+                  borderBottom: '2px solid rgba(249,115,22,0.3)',
+                  borderLeft: '2px solid rgba(249,115,22,0.3)',
+                  borderRadius: '0 0 0 4px',
+                }}
+              />
+
+              {/* Photo container */}
+              <motion.div
+                className="relative rounded-2xl overflow-hidden"
+                style={{
+                  border: '1px solid rgba(249,115,22,0.2)',
+                  boxShadow: '0 32px 80px rgba(0,0,0,0.6), 0 0 0 1px rgba(249,115,22,0.08)',
+                }}
+                animate={{ y: [0, -8, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
+              >
+                <img
+                  src="/profile.png"
+                  alt="Lawal Ab Oluwaseun"
+                  className="w-full object-cover object-top"
+                  style={{ aspectRatio: '4/5' }}
+                />
+                {/* Subtle orange bottom gradient overlay */}
+                <div
+                  className="absolute bottom-0 left-0 right-0 h-32 pointer-events-none"
+                  style={{
+                    background: 'linear-gradient(to top, rgba(13,13,13,0.5) 0%, transparent 100%)',
+                  }}
+                />
+              </motion.div>
+
+              {/* Floating badge — experience */}
+              <motion.div
+                className="absolute -bottom-5 -left-5 glass-orange rounded-2xl px-4 py-2.5"
+                style={{ boxShadow: '0 8px 32px rgba(249,115,22,0.2)' }}
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
+                <div className="text-xl font-black gradient-text">2+</div>
+                <div className="text-[10px] text-white/60 leading-tight">Yrs Experience</div>
+              </motion.div>
+
+              {/* Floating badge — status */}
+              <motion.div
+                className="absolute -top-5 -right-5 glass-orange rounded-2xl px-4 py-2.5"
+                style={{ boxShadow: '0 8px 32px rgba(249,115,22,0.2)' }}
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.4, duration: 0.6 }}
+              >
+                <div className="flex items-center gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse" />
+                  <span className="text-xs font-semibold text-white/80">Available</span>
+                </div>
+                <div className="text-[10px] text-white/40 mt-0.5">for hire</div>
+              </motion.div>
+            </div>
+          </motion.div>
         </div>
       </div>
 

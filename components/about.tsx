@@ -130,7 +130,7 @@ export default function About() {
                 animate={{ y: [0, -5, 0] }}
                 transition={{ duration: 3, repeat: Infinity, ease: 'easeInOut' }}
               >
-                <div className="text-2xl font-black gradient-text">3+</div>
+                <div className="text-2xl font-black gradient-text">2+</div>
                 <div className="text-xs text-white/60">Years of Experience</div>
               </motion.div>
 
@@ -140,8 +140,8 @@ export default function About() {
                 animate={{ y: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
               >
-                <div className="text-2xl font-black gradient-text">20+</div>
-                <div className="text-xs text-white/60">Projects Done</div>
+                <div className="text-2xl font-black gradient-text">5+</div>
+                <div className="text-xs text-white/60">Projects Shipped</div>
               </motion.div>
             </div>
           </motion.div>
@@ -155,15 +155,15 @@ export default function About() {
           >
             <motion.div variants={slideRight}>
               <h3 className="text-3xl lg:text-4xl font-black text-white leading-tight mb-4">
-                I will{' '}
+                I{' '}
                 <span className="shimmer-text">Design, Build &amp; Secure</span>
                 <br />
-                the best digital products
+                real-world digital products
               </h3>
               <p className="text-white/50 leading-relaxed text-base">
-                I&apos;m a Full Stack Developer &amp; Cybersecurity Enthusiast based in Lagos, Nigeria.
-                I build exceptional digital experiences across web and mobile, while keeping security
-                at the core of everything I create — from blockchain tools to scalable web platforms.
+                I&apos;m a Senior Full Stack Developer based in Lagos, Nigeria, with hands-on experience
+                building modern web and mobile applications. I&apos;ve worked across insurance, e-commerce,
+                service platforms, and fintech — translating business requirements into practical digital solutions.
               </p>
             </motion.div>
 
@@ -171,10 +171,10 @@ export default function About() {
               variants={itemVariants}
               className="text-white/40 leading-relaxed text-sm"
             >
-              I&apos;ve explored entrepreneurship, online education, and software development —
-              each shaping my resilience and problem-solving approach. I lead a Mastermind Group
-              in Software Engineering &amp; Cybersecurity, and I&apos;m constantly pushing boundaries
-              through continuous learning and building practical digital solutions.
+              Beyond code, I bring an entrepreneurial mindset — co-founding DripBox.ng, delivering live
+              cybersecurity training at thesocschool, and currently building the AMMC Builders Liability
+              Insurance Platform. I&apos;m continuously expanding in cloud deployment, Web3 security, and
+              scalable architecture.
             </motion.p>
 
             {/* Highlights grid */}
