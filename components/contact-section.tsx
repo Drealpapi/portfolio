@@ -1,35 +1,12 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { Mail, Phone, MapPin, Send, Github, Linkedin } from 'lucide-react'
-
-const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'seunlawal18@gmail.com', href: 'mailto:seunlawal18@gmail.com' },
-  { icon: Phone, label: 'Phone', value: '+2349021914839', href: 'tel:+2349021914839' },
-  { icon: MapPin, label: 'Location', value: 'Lagos, Nigeria', href: '#' },
-]
-
-function TikTokIcon({ size = 16, color = '#ffffff' }: { size?: number; color?: string }) {
-  return (
-    <svg width={size} height={size} viewBox="0 0 24 24" fill={color}>
-      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z" />
-    </svg>
-  )
-}
-
-const socials = [
-  { icon: Github, href: 'https://github.com/Drealpapi', label: 'GitHub', color: '#ffffff' },
-  { icon: Linkedin, href: 'https://www.linkedin.com/in/lawal-oluwaseun-370a42268', label: 'LinkedIn', color: '#0077b5' },
-  { icon: TikTokIcon, href: 'https://www.tiktok.com/@drealpapie', label: 'TikTok', color: '#ffffff' },
-]
+import { useState } from 'react'
+import { Mail, Phone, MapPin, Send } from 'lucide-react'
 
 const FORMSPREE_URL = 'https://formspree.io/f/xojrvnyg'
 
 export default function ContactSection() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-  const [formState, setFormState] = useState({ name: '', email: '', subject: '', message: '' })
+  const [form, setForm] = useState({ name: '', email: '', message: '' })
   const [sending, setSending] = useState(false)
   const [sent, setSent] = useState(false)
   const [error, setError] = useState(false)
@@ -42,16 +19,11 @@ export default function ContactSection() {
       const res = await fetch(FORMSPREE_URL, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        body: JSON.stringify({
-          name: formState.name,
-          email: formState.email,
-          subject: formState.subject,
-          message: formState.message,
-        }),
+        body: JSON.stringify(form),
       })
       if (res.ok) {
         setSent(true)
-        setFormState({ name: '', email: '', subject: '', message: '' })
+        setForm({ name: '', email: '', message: '' })
         setTimeout(() => setSent(false), 5000)
       } else {
         setError(true)
@@ -66,272 +38,140 @@ export default function ContactSection() {
   return (
     <section
       id="contact"
-      ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ background: '#0a0a0a' }}
+      style={{
+        background: '#0a0a0a',
+        padding: '5rem 1.5rem',
+        borderTop: '1px solid #111',
+      }}
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(249,115,22,0.3), transparent)' }}
-      />
-
-      {/* Background */}
-      <div className="absolute inset-0 grid-pattern opacity-20" />
-      <div
-        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[500px] rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(ellipse, rgba(249,115,22,0.06) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        {/* Header */}
-        <motion.div
-          className="text-center mb-16"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <span className="text-orange-400 text-sm font-medium tracking-[0.3em] uppercase">
-            Let&apos;s work together
-          </span>
-          <h2 className="text-4xl lg:text-5xl font-black text-white mt-3">
-            Get a <span className="gradient-text">Quote</span>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        {/* Section heading */}
+        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2.5rem' }}>
+          <h2 className="section-heading">
+            <span className="hash">#</span>contacts
           </h2>
-          <p className="text-white/40 mt-3 max-w-md mx-auto text-sm leading-relaxed">
-            Have a project in mind? Let&apos;s discuss how I can help bring your vision to life.
-          </p>
-        </motion.div>
+          <div className="section-divider" />
+        </div>
 
-        <div className="grid lg:grid-cols-5 gap-8 items-start">
-          {/* Left — Contact info */}
-          <motion.div
-            className="lg:col-span-2 flex flex-col gap-6"
-            initial={{ opacity: 0, x: -40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          >
-            {/* Avatar / brand */}
-            <div className="flex items-center gap-4 mb-2">
-              <div className="w-14 h-14 rounded-xl overflow-hidden flex-shrink-0">
-                <img src="/logo.png" alt="Lawal A. Oluwaseun" className="w-full h-full object-cover" />
-              </div>
-              <div>
-                <div className="text-white font-bold text-lg">Lawal A. Oluwaseun</div>
-                <div className="text-orange-400 text-sm">Senior Full Stack Dev & Cybersecurity Enthusiast</div>
-              </div>
-            </div>
-
-            <p className="text-white/40 text-sm leading-relaxed">
-              I&apos;m always open to discussing new projects, creative ideas, or opportunities to be part of your vision. Let&apos;s create something amazing together.
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '1fr 1fr',
+            gap: '3rem',
+            alignItems: 'start',
+          }}
+          className="contact-grid"
+        >
+          {/* Left — info */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+            <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.7, fontFamily: 'inherit' }}>
+              I&apos;m interested in freelance opportunities. However, if you have any
+              other request or question, don&apos;t hesitate to contact me.
             </p>
 
-            {/* Contact details */}
-            <div className="flex flex-col gap-4">
-              {contactInfo.map((item, i) => (
-                <motion.a
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-4 group"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={inView ? { opacity: 1, x: 0 } : {}}
-                  transition={{ delay: 0.3 + i * 0.1, duration: 0.5 }}
-                  whileHover={{ x: 4 }}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem', marginTop: '0.5rem' }}>
+              {[
+                { icon: Mail, label: 'seunlawal18@gmail.com', href: 'mailto:seunlawal18@gmail.com' },
+                { icon: Phone, label: '+2349021914839', href: 'tel:+2349021914839' },
+                { icon: MapPin, label: 'Lagos, Nigeria', href: '#' },
+              ].map(({ icon: Icon, label, href }) => (
+                <a
+                  key={label}
+                  href={href}
+                  style={{
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '0.625rem',
+                    color: '#666',
+                    fontSize: '0.8125rem',
+                    fontFamily: 'inherit',
+                    textDecoration: 'none',
+                    transition: 'color 0.2s',
+                  }}
+                  onMouseEnter={(e) => (e.currentTarget.style.color = '#f97316')}
+                  onMouseLeave={(e) => (e.currentTarget.style.color = '#666')}
                 >
-                  <div
-                    className="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0 transition-all duration-300 group-hover:scale-110"
-                    style={{
-                      background: 'rgba(249,115,22,0.1)',
-                      border: '1px solid rgba(249,115,22,0.2)',
-                    }}
-                  >
-                    <item.icon size={16} className="text-orange-400" />
-                  </div>
-                  <div>
-                    <div className="text-xs text-white/30 mb-0.5">{item.label}</div>
-                    <div className="text-sm text-white/70 group-hover:text-white transition-colors">
-                      {item.value}
-                    </div>
-                  </div>
-                </motion.a>
+                  <Icon size={14} style={{ color: '#f97316', flexShrink: 0 }} />
+                  {label}
+                </a>
               ))}
             </div>
+          </div>
 
-            {/* Social links */}
-            <div>
-              <div className="text-xs text-white/30 mb-3 tracking-[0.15em] uppercase">Follow me</div>
-              <div className="flex gap-3">
-                {socials.map((social) => (
-                  <motion.a
-                    key={social.label}
-                    href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-10 h-10 rounded-xl flex items-center justify-center"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      pointerEvents: 'auto',
-                    }}
-                    whileHover={{
-                      scale: 1.15,
-                      background: `${social.color}20`,
-                      borderColor: `${social.color}60`,
-                    }}
-                    whileTap={{ scale: 0.95 }}
-                    aria-label={social.label}
-                  >
-                    <social.icon size={16} style={{ color: social.color, opacity: 0.7 }} />
-                  </motion.a>
-                ))}
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Right — Form */}
-          <motion.div
-            className="lg:col-span-3"
-            initial={{ opacity: 0, x: 40 }}
-            animate={inView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
+          {/* Right — form */}
+          <div
+            style={{
+              background: '#0d0d0d',
+              border: '1px solid #1e1e1e',
+              padding: '1.5rem',
+            }}
           >
-            <div
-              className="rounded-2xl p-6 lg:p-8"
-              style={{
-                background: 'rgba(20,20,20,0.8)',
-                border: '1px solid rgba(249,115,22,0.12)',
-                backdropFilter: 'blur(20px)',
-              }}
-            >
-              {/* Top accent */}
-              <div
-                className="absolute top-0 left-0 right-0 h-px rounded-t-2xl"
-                style={{ background: 'linear-gradient(90deg, transparent, rgba(249,115,22,0.4), transparent)' }}
+            <p style={{ color: '#555', fontSize: '0.75rem', fontFamily: 'inherit', marginBottom: '1rem' }}>
+              Message me here
+            </p>
+
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+              <input
+                type="text"
+                className="input-field"
+                placeholder="Name"
+                value={form.name}
+                onChange={(e) => setForm({ ...form, name: e.target.value })}
+                required
+              />
+              <input
+                type="email"
+                className="input-field"
+                placeholder="Email"
+                value={form.email}
+                onChange={(e) => setForm({ ...form, email: e.target.value })}
+                required
+              />
+              <textarea
+                className="input-field"
+                placeholder="Message"
+                rows={4}
+                value={form.message}
+                onChange={(e) => setForm({ ...form, message: e.target.value })}
+                required
+                style={{ resize: 'vertical' }}
               />
 
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div className="grid sm:grid-cols-2 gap-5">
-                  {/* Name */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/50 tracking-wide">
-                      Your Full Name
-                    </label>
-                    <input
-                      type="text"
-                      value={formState.name}
-                      onChange={(e) => setFormState({ ...formState, name: e.target.value })}
-                      placeholder="John Doe"
-                      required
-                      className="input-glow w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 transition-all duration-300"
-                      style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        outline: 'none',
-                      }}
-                    />
-                  </div>
-
-                  {/* Email */}
-                  <div className="flex flex-col gap-2">
-                    <label className="text-xs font-medium text-white/50 tracking-wide">
-                      Email Address
-                    </label>
-                    <input
-                      type="email"
-                      value={formState.email}
-                      onChange={(e) => setFormState({ ...formState, email: e.target.value })}
-                      placeholder="john@example.com"
-                      required
-                      className="input-glow w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 transition-all duration-300"
-                      style={{
-                        background: 'rgba(255,255,255,0.04)',
-                        border: '1px solid rgba(255,255,255,0.08)',
-                        outline: 'none',
-                      }}
-                    />
-                  </div>
-                </div>
-
-                {/* Subject */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-medium text-white/50 tracking-wide">
-                    Subject
-                  </label>
-                  <input
-                    type="text"
-                    value={formState.subject}
-                    onChange={(e) => setFormState({ ...formState, subject: e.target.value })}
-                    placeholder="Project Inquiry / Collaboration"
-                    required
-                    className="input-glow w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 transition-all duration-300"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      outline: 'none',
-                    }}
-                  />
-                </div>
-
-                {/* Message */}
-                <div className="flex flex-col gap-2">
-                  <label className="text-xs font-medium text-white/50 tracking-wide">
-                    Your Message
-                  </label>
-                  <textarea
-                    value={formState.message}
-                    onChange={(e) => setFormState({ ...formState, message: e.target.value })}
-                    placeholder="Tell me about your project, goals, and timeline..."
-                    required
-                    rows={5}
-                    className="input-glow w-full px-4 py-3 rounded-xl text-sm text-white placeholder-white/20 transition-all duration-300 resize-none"
-                    style={{
-                      background: 'rgba(255,255,255,0.04)',
-                      border: '1px solid rgba(255,255,255,0.08)',
-                      outline: 'none',
-                    }}
-                  />
-                </div>
-
-                {/* Submit */}
-                <motion.button
-                  type="submit"
-                  disabled={sending || sent}
-                  className="btn-orange w-full py-4 rounded-xl text-sm font-semibold text-white flex items-center justify-center gap-2 disabled:opacity-70"
-                  whileHover={!sending && !sent ? { scale: 1.02 } : {}}
-                  whileTap={!sending && !sent ? { scale: 0.98 } : {}}
-                >
-                  {sent ? (
-                    <>
-                      <motion.span initial={{ scale: 0 }} animate={{ scale: 1 }} className="text-base">✓</motion.span>
-                      Message Sent!
-                    </>
-                  ) : sending ? (
-                    <>
-                      <motion.div
-                        className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full"
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 0.8, repeat: Infinity, ease: 'linear' }}
-                      />
-                      Sending...
-                    </>
-                  ) : (
-                    <>
-                      <Send size={16} />
-                      Send Message
-                    </>
-                  )}
-                </motion.button>
-                {error && (
-                  <p className="text-red-400 text-xs text-center mt-1">
-                    Something went wrong. Please try again or email me directly.
-                  </p>
+              <button
+                type="submit"
+                className="btn-primary"
+                disabled={sending || sent}
+                style={{ justifyContent: 'center', opacity: sending ? 0.7 : 1 }}
+              >
+                {sent ? (
+                  '✓ Sent!'
+                ) : sending ? (
+                  'Sending...'
+                ) : (
+                  <>
+                    <Send size={13} />
+                    Send Message
+                  </>
                 )}
-              </form>
-            </div>
-          </motion.div>
+              </button>
+
+              {error && (
+                <p style={{ color: '#e55', fontSize: '0.75rem', fontFamily: 'inherit' }}>
+                  Something went wrong. Try emailing me directly.
+                </p>
+              )}
+            </form>
+          </div>
         </div>
       </div>
+
+      <style>{`
+        @media (max-width: 640px) {
+          .contact-grid {
+            grid-template-columns: 1fr !important;
+          }
+        }
+      `}</style>
     </section>
   )
 }

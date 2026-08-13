@@ -121,7 +121,7 @@ export default function RootLayout({
       </head>
       <body
         className="antialiased"
-        style={{ fontFamily: 'var(--font-poppins), var(--font-inter), sans-serif' }}
+        style={{ fontFamily: "'Courier New', Consolas, monospace" }}
       >
         {children}
       </body>

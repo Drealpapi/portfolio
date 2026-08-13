@@ -1,322 +1,215 @@
 'use client'
 
-import { useRef } from 'react'
-import { motion, useInView } from 'framer-motion'
-import { ExternalLink, Github, ArrowUpRight, BookOpen } from 'lucide-react'
+import { ExternalLink, Github, BookOpen } from 'lucide-react'
 
 const projects = [
   {
     id: 1,
-    title: 'AMMC Builders Liability Insurance Platform',
+    title: 'AMMC Insurance Platform',
     category: 'Insurance & Compliance',
     description:
-      'A modern web-based insurance and compliance platform streamlining the Builders Liability Insurance process for construction projects. Provides a centralized digital experience for stakeholders to submit, manage, verify, and track insurance policies — improving transparency and regulatory compliance.',
-    tech: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB', 'Tailwind'],
-    color: '#f97316',
-    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.18) 0%, rgba(234,88,12,0.06) 100%)',
+      'Digital platform streamlining Builders Liability Insurance for construction projects. Centralized experience for stakeholders to submit, manage, verify, and track insurance policies.',
+    tech: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB'],
     live: '',
     github: '',
     article: '',
-    badge: 'Featured',
+    featured: true,
   },
   {
     id: 2,
     title: 'GETEASY',
     category: 'Service Aggregator',
     description:
-      'A platform connecting service providers with users seeking on-demand services. Focused on system architecture, user flow, and matching logic between providers and clients. Simplifying service discovery with a mobile-friendly interface and scalable backend.',
+      'Connects service providers with users seeking on-demand services. Focused on system architecture, user flow, and matching logic.',
     tech: ['React Native', 'Node.js', 'MongoDB'],
-    color: '#fb923c',
-    gradient: 'linear-gradient(135deg, rgba(251,146,60,0.1) 0%, rgba(249,115,22,0.03) 100%)',
     live: '',
     github: 'https://github.com/Drealpapi/GetEasy',
     article: '',
-    badge: '',
+    featured: false,
   },
   {
     id: 3,
     title: 'FutureFest',
     category: 'Events Platform',
     description:
-      'A web platform for artists to promote and manage upcoming live events. Focused on UI design, event discovery experience, and audience engagement. Features event listing, promotion, and interactive browsing.',
+      'Web platform for artists to promote and manage upcoming live events. Built event listing, promotion, and audience engagement features.',
     tech: ['React', 'Next.js', 'Tailwind'],
-    color: '#f97316',
-    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.12) 0%, rgba(251,146,60,0.04) 100%)',
     live: 'https://v0-futurefest-clone.vercel.app/',
     github: 'https://github.com/Drealpapi',
     article: '',
-    badge: '',
+    featured: false,
   },
   {
     id: 4,
     title: 'ClipClip',
     category: 'Security Research',
     description:
-      'Documented and demonstrated a clipboard hijacking attack targeting cryptocurrency addresses. The tool detects wallet address prefixes (e.g. bc1) and silently swaps them — exploiting the fact that victims rarely verify all characters. Published as a security awareness writeup.',
-    tech: ['Python', 'Cybersecurity', 'Blockchain', 'Security Research'],
-    color: '#f97316',
-    gradient: 'linear-gradient(135deg, rgba(249,115,22,0.15) 0%, rgba(234,88,12,0.05) 100%)',
+      'Clipboard hijacking attack demonstration targeting crypto addresses. Detects wallet prefixes and swaps them silently. Published as security awareness writeup.',
+    tech: ['Python', 'Cybersecurity', 'Blockchain'],
     live: '',
     github: '',
     article: 'https://medium.com/@seunlawal18/how-clipboard-hijacking-silently-steals-crypto-and-why-youll-never-notice-f37cc3baef13',
-    badge: '',
+    featured: false,
   },
   {
     id: 5,
     title: 'DripBox.ng',
-    category: 'E-Commerce Platform',
+    category: 'E-Commerce',
     description:
-      'Co-founded and launched a Nigerian e-commerce store. Handled product selection, UX design, and retail operations. The venture ran for a year before closing — a valuable lesson in product-market fit and early-stage execution.',
-    tech: ['E-Commerce', 'UX Design', 'Business'],
-    color: '#fb923c',
-    gradient: 'linear-gradient(135deg, rgba(251,146,60,0.12) 0%, rgba(249,115,22,0.04) 100%)',
+      'Co-founded and launched a Nigerian e-commerce store. Handled product selection, UX design, and retail operations for a year.',
+    tech: ['E-Commerce', 'UX Design'],
     live: '',
     github: '',
     article: '',
-    badge: '',
+    featured: false,
   },
 ]
 
-function ProjectCard({
-  project,
-  index,
-}: {
-  project: (typeof projects)[0]
-  index: number
-}) {
-  const hasAnyLink = project.live || project.github || project.article
+function ProjectCard({ project }: { project: typeof projects[0] }) {
+  const hasLink = project.live || project.github || project.article
 
   return (
-    <motion.div
-      className="group relative rounded-2xl overflow-hidden"
-      style={{
-        background: project.gradient,
-        border: index === 0 ? '1px solid rgba(249,115,22,0.28)' : '1px solid rgba(249,115,22,0.1)',
-      }}
-      initial={{ opacity: 0, y: 40 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-50px' }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: [0.16, 1, 0.3, 1] }}
-      whileHover={{
-        y: -8,
-        borderColor: 'rgba(249,115,22,0.3)',
-        boxShadow: '0 20px 60px rgba(249,115,22,0.12), 0 0 0 1px rgba(249,115,22,0.2)',
-      }}
-    >
-      {/* Top accent line */}
+    <div className="project-card" style={{ display: 'flex', flexDirection: 'column' }}>
+      {/* Header bar */}
       <div
-        className="absolute top-0 left-0 right-0 h-px"
         style={{
-          background: `linear-gradient(90deg, transparent, ${project.color}60, transparent)`,
+          padding: '0.625rem 1rem',
+          borderBottom: '1px solid #1e1e1e',
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
         }}
-      />
-
-      {/* Card number */}
-      <div
-        className="absolute top-4 right-4 text-5xl font-black opacity-5 select-none"
-        style={{ color: project.color }}
       >
-        {String(index + 1).padStart(2, '0')}
+        <span style={{ color: '#f97316', fontSize: '0.75rem', fontFamily: 'inherit' }}>
+          {project.category}
+        </span>
+        {project.featured && (
+          <span
+            style={{
+              fontSize: '0.65rem',
+              padding: '2px 8px',
+              border: '1px solid #f97316',
+              color: '#f97316',
+              fontFamily: 'inherit',
+            }}
+          >
+            featured
+          </span>
+        )}
       </div>
 
-      <div className="p-6 lg:p-7">
-        {/* Category */}
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-2">
-            <span
-              className="text-xs font-semibold tracking-[0.15em] uppercase px-3 py-1 rounded-full"
-              style={{
-                background: 'rgba(249,115,22,0.1)',
-                color: '#f97316',
-                border: '1px solid rgba(249,115,22,0.2)',
-              }}
-            >
-              {project.category}
-            </span>
-            {project.badge && (
-              <span
-                className="text-xs font-bold tracking-wide px-2.5 py-1 rounded-full"
-                style={{
-                  background: 'rgba(249,115,22,0.9)',
-                  color: '#fff',
-                }}
-              >
-                {project.badge}
-              </span>
-            )}
-          </div>
-          <motion.div
-            className="opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-            whileHover={{ rotate: 45 }}
-          >
-            <ArrowUpRight size={18} className="text-orange-400" />
-          </motion.div>
-        </div>
-
-        {/* Title */}
-        <h3 className="text-xl font-bold text-white mb-3 group-hover:text-orange-300 transition-colors duration-300">
+      {/* Body */}
+      <div style={{ padding: '1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+        <h3 style={{ color: '#fff', fontSize: '1rem', fontWeight: 600, fontFamily: 'inherit' }}>
           {project.title}
         </h3>
-
-        {/* Description */}
-        <p className="text-sm text-white/45 leading-relaxed mb-5">
+        <p style={{ color: '#666', fontSize: '0.8125rem', lineHeight: 1.6, fontFamily: 'inherit', flex: 1 }}>
           {project.description}
         </p>
 
-        {/* Tech stack */}
-        <div className="flex flex-wrap gap-2 mb-6">
-          {project.tech.map((tech) => (
+        {/* Tech */}
+        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.375rem' }}>
+          {project.tech.map((t) => (
             <span
-              key={tech}
-              className="text-xs px-2.5 py-1 rounded-lg font-medium"
+              key={t}
               style={{
-                background: 'rgba(255,255,255,0.05)',
-                color: 'rgba(255,255,255,0.5)',
-                border: '1px solid rgba(255,255,255,0.08)',
+                fontSize: '0.7rem',
+                color: '#555',
+                border: '1px solid #1e1e1e',
+                padding: '2px 8px',
+                fontFamily: 'inherit',
               }}
             >
-              {tech}
+              {t}
             </span>
           ))}
         </div>
 
-        {/* Actions */}
-        <div className="flex gap-3">
+        {/* Links */}
+        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem' }}>
           {project.live && (
-            <motion.a
-              href={project.live}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-orange flex-1 py-2.5 rounded-xl text-sm font-semibold text-white text-center flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <ExternalLink size={14} />
-              View Live
-            </motion.a>
+            <a href={project.live} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.75rem', padding: '0.375rem 0.875rem' }}>
+              <ExternalLink size={12} />
+              live
+            </a>
           )}
           {project.article && (
-            <motion.a
-              href={project.article}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-orange flex-1 py-2.5 rounded-xl text-sm font-semibold text-white text-center flex items-center justify-center gap-2"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              <BookOpen size={14} />
-              Read Article
-            </motion.a>
+            <a href={project.article} target="_blank" rel="noopener noreferrer" className="btn-primary" style={{ fontSize: '0.75rem', padding: '0.375rem 0.875rem' }}>
+              <BookOpen size={12} />
+              article
+            </a>
           )}
           {project.github && (
-            <motion.a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className={`btn-outline-orange rounded-xl flex items-center justify-center gap-2 ${
-                project.live || project.article
-                  ? 'w-10 h-10 flex-shrink-0'
-                  : 'flex-1 py-2.5 text-sm font-semibold'
-              }`}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              aria-label="View on GitHub"
-            >
-              <Github size={16} />
-              {!project.live && !project.article && <span>View on GitHub</span>}
-            </motion.a>
+            <a href={project.github} target="_blank" rel="noopener noreferrer" className="btn-ghost" style={{ fontSize: '0.75rem', padding: '0.375rem 0.875rem' }}>
+              <Github size={12} />
+              github
+            </a>
           )}
-          {!hasAnyLink && (
-            <div
-              className="flex-1 py-2.5 rounded-xl text-sm font-medium text-center"
-              style={{
-                background: 'rgba(255,255,255,0.03)',
-                border: '1px solid rgba(255,255,255,0.06)',
-                color: 'rgba(255,255,255,0.2)',
-              }}
-            >
-              In development
-            </div>
+          {!hasLink && (
+            <span style={{ color: '#333', fontSize: '0.75rem', fontFamily: 'inherit', alignSelf: 'center' }}>
+              — in development
+            </span>
           )}
         </div>
       </div>
-    </motion.div>
+    </div>
   )
 }
 
 export default function Projects() {
-  const ref = useRef(null)
-  const inView = useInView(ref, { once: true, margin: '-100px' })
-
   return (
     <section
       id="projects"
-      ref={ref}
-      className="relative py-24 lg:py-32 overflow-hidden"
-      style={{ background: '#0d0d0d' }}
+      style={{
+        background: '#0a0a0a',
+        padding: '5rem 1.5rem',
+        borderTop: '1px solid #111',
+      }}
     >
-      <div
-        className="absolute top-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(249,115,22,0.2), transparent)' }}
-      />
-
-      <div
-        className="absolute top-1/2 right-0 w-96 h-96 rounded-full pointer-events-none"
-        style={{
-          background: 'radial-gradient(circle, rgba(249,115,22,0.05) 0%, transparent 70%)',
-          filter: 'blur(60px)',
-          transform: 'translateY(-50%)',
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <motion.div
-          className="flex flex-col lg:flex-row lg:items-end justify-between gap-6 mb-14"
-          initial={{ opacity: 0, y: 30 }}
-          animate={inView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.7 }}
-        >
-          <div>
-            <span className="text-orange-400 text-sm font-medium tracking-[0.3em] uppercase">
-              My Work
-            </span>
-            <h2 className="text-4xl lg:text-5xl font-black text-white mt-3">
-              Featured <span className="gradient-text">Projects</span>
+      <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
+        {/* Section heading */}
+        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
+          <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
+            <h2 className="section-heading">
+              <span className="hash">#</span>projects
             </h2>
-            <p className="text-white/40 mt-3 max-w-md text-sm leading-relaxed">
-              A selection of projects spanning web development, cybersecurity research, and entrepreneurship.
-            </p>
+            <div className="section-divider" style={{ maxWidth: '200px' }} />
           </div>
-
-          <motion.a
+          <a
             href="https://github.com/Drealpapi"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn-outline-orange px-6 py-3 rounded-xl text-sm font-semibold flex items-center gap-2 self-start lg:self-auto"
-            whileHover={{ scale: 1.03 }}
-            whileTap={{ scale: 0.97 }}
+            style={{
+              color: '#555',
+              fontSize: '0.8125rem',
+              fontFamily: 'inherit',
+              textDecoration: 'none',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.25rem',
+              whiteSpace: 'nowrap',
+              marginLeft: '1rem',
+            }}
+            onMouseEnter={(e) => (e.currentTarget.style.color = '#f97316')}
+            onMouseLeave={(e) => (e.currentTarget.style.color = '#555')}
           >
-            <Github size={16} />
-            View All on GitHub
-          </motion.a>
-        </motion.div>
+            View all ~~&gt;
+          </a>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {projects.map((project, i) => (
-            <div
-              key={project.id}
-              className={i === 0 ? 'md:col-span-2 lg:col-span-3' : ''}
-            >
-              <ProjectCard project={project} index={i} />
-            </div>
+        {/* Grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
+            gap: '1rem',
+          }}
+        >
+          {projects.map((p) => (
+            <ProjectCard key={p.id} project={p} />
           ))}
         </div>
       </div>
-
-      <div
-        className="absolute bottom-0 left-0 right-0 h-px"
-        style={{ background: 'linear-gradient(90deg, transparent, rgba(249,115,22,0.15), transparent)' }}
-      />
     </section>
   )
 }
