@@ -48,7 +48,7 @@ export default function Hero() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        background: '#0a0a0a',
+        background: 'transparent',
         paddingTop: '3.5rem',
       }}
     >
@@ -123,23 +123,6 @@ export default function Hero() {
             .
           </p>
 
-          {/* Status tag */}
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span
-              style={{
-                width: '6px',
-                height: '6px',
-                borderRadius: '50%',
-                background: '#22c55e',
-                display: 'inline-block',
-                animation: 'pulse 2s infinite',
-              }}
-            />
-            <span style={{ color: '#555', fontSize: '0.75rem', fontFamily: 'inherit' }}>
-              Open to new opportunities
-            </span>
-          </div>
-
           {/* CTA buttons */}
           <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
             <button className="btn-primary" onClick={scrollDown}>
@@ -165,15 +148,70 @@ export default function Hero() {
           }}
           className="hero-photo"
         >
+          {/* Dot grid decoration — top right */}
+          <div style={{
+            position: 'absolute',
+            top: '-16px',
+            right: '-16px',
+            width: '70px',
+            height: '70px',
+            backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
+            backgroundSize: '10px 10px',
+            zIndex: 0,
+          }} />
+          {/* Dot grid decoration — bottom left */}
+          <div style={{
+            position: 'absolute',
+            bottom: '-16px',
+            left: '-16px',
+            width: '70px',
+            height: '70px',
+            backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
+            backgroundSize: '10px 10px',
+            zIndex: 0,
+          }} />
+
           {/* Corner brackets */}
           <div style={{
             position: 'absolute', top: '-8px', left: '-8px', width: '20px', height: '20px',
-            borderTop: '2px solid #f97316', borderLeft: '2px solid #f97316',
+            borderTop: '2px solid #f97316', borderLeft: '2px solid #f97316', zIndex: 2,
           }} />
           <div style={{
             position: 'absolute', bottom: '-8px', right: '-8px', width: '20px', height: '20px',
-            borderBottom: '2px solid #f97316', borderRight: '2px solid #f97316',
+            borderBottom: '2px solid #f97316', borderRight: '2px solid #f97316', zIndex: 2,
           }} />
+
+          {/* Currently working on tag — below photo like reference */}
+          <div
+            style={{
+              position: 'absolute',
+              bottom: '-40px',
+              left: '50%',
+              transform: 'translateX(-50%)',
+              whiteSpace: 'nowrap',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '0.375rem',
+              background: '#111',
+              border: '1px solid #222',
+              padding: '4px 10px',
+              fontSize: '0.7rem',
+              color: '#666',
+              fontFamily: 'inherit',
+              zIndex: 2,
+            }}
+          >
+            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f97316', display: 'inline-block' }} />
+            Currently working on{' '}
+            <a
+              href="https://www.ammcbuildersinsurance.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#f97316', textDecoration: 'none' }}
+            >
+              AMMC
+            </a>
+          </div>
 
           <div
             style={{
@@ -182,6 +220,7 @@ export default function Hero() {
               overflow: 'hidden',
               border: '1px solid #222',
               position: 'relative',
+              zIndex: 1,
             }}
           >
             <Image

@@ -8,7 +8,7 @@ export default function About() {
     <section
       id="about"
       style={{
-        background: '#0a0a0a',
+        background: 'transparent',
         padding: '5rem 1.5rem',
         borderTop: '1px solid #111',
       }}
@@ -26,15 +26,18 @@ export default function About() {
         <div
           style={{
             display: 'grid',
-            gridTemplateColumns: '1fr 280px',
-            gap: '3rem',
-            alignItems: 'start',
+            gridTemplateColumns: '1fr 300px',
+            gap: '4rem',
+            alignItems: 'center',
           }}
           className="about-grid"
         >
           {/* Left — text */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
             <p style={{ color: '#888', fontSize: '0.875rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
+              Hello, I&apos;m <span style={{ color: '#fff' }}>Lawal Ab Oluwaseun</span>.
+            </p>
+            <p style={{ color: '#777', fontSize: '0.875rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
               I&apos;m a Senior Full Stack Developer based in Lagos, Nigeria, with hands-on
               experience building modern web and mobile applications. I&apos;ve worked across
               insurance, e-commerce, service platforms, and fintech — translating business
@@ -43,22 +46,27 @@ export default function About() {
             <p style={{ color: '#666', fontSize: '0.875rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
               Beyond code, I bring an entrepreneurial mindset — co-founding DripBox.ng,
               delivering live cybersecurity training at thesocschool (Maryland, US), and
-              currently building the AMMC Builders Liability Insurance Platform at Eleaders
-              Network. I&apos;m continuously expanding in cloud deployment, Web3 security, and
-              scalable application architecture.
+              shipping the{' '}
+              <a
+                href="https://www.ammcbuildersinsurance.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{ color: '#f97316', textDecoration: 'none', borderBottom: '1px solid rgba(249,115,22,0.3)' }}
+              >
+                AMMC Builders Insurance Platform
+              </a>
+              . Continuously expanding in cloud deployment, Web3 security, and scalable
+              application architecture.
             </p>
             <p style={{ color: '#666', fontSize: '0.875rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
-              I speak <span style={{ color: '#aaa' }}>English</span> and{' '}
-              <span style={{ color: '#aaa' }}>Yoruba</span>, and I&apos;m always open to
-              freelance projects, collaborations, or full-time opportunities.
+              If you have other requests or questions, don&apos;t hesitate to contact me.
             </p>
 
-            {/* Stats row */}
+            {/* Stats */}
             <div
               style={{
                 display: 'flex',
                 gap: '2rem',
-                marginTop: '0.5rem',
                 paddingTop: '1.5rem',
                 borderTop: '1px solid #1a1a1a',
                 flexWrap: 'wrap',
@@ -67,7 +75,7 @@ export default function About() {
               {[
                 { val: '4+', label: 'Years Experience' },
                 { val: '5+', label: 'Projects Shipped' },
-                { val: '3', label: 'Organisations' },
+                { val: '3',  label: 'Organisations' },
               ].map((s) => (
                 <div key={s.label}>
                   <div style={{ color: '#f97316', fontSize: '1.25rem', fontWeight: 700 }}>{s.val}</div>
@@ -77,7 +85,7 @@ export default function About() {
             </div>
 
             {/* CTA */}
-            <div style={{ display: 'flex', gap: '0.75rem', marginTop: '0.5rem', flexWrap: 'wrap' }}>
+            <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap' }}>
               <a
                 href="#contact"
                 onClick={(e) => { e.preventDefault(); document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' }) }}
@@ -87,36 +95,57 @@ export default function About() {
               </a>
               <a href="/resume.pdf" download="Lawal_Ab_Oluwaseun_CV.pdf" className="btn-ghost">
                 <Download size={14} />
-                Resume
+                Resume ↓
               </a>
             </div>
           </div>
 
-          {/* Right — photo */}
-          <div style={{ position: 'relative' }} className="about-photo">
-            {/* Corner brackets */}
+          {/* Right — avatar illustration */}
+          <div
+            className="about-avatar"
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              position: 'relative',
+            }}
+          >
+            {/* Dot grid decoration behind avatar */}
             <div style={{
-              position: 'absolute', top: '-6px', left: '-6px', width: '16px', height: '16px',
-              borderTop: '2px solid #f97316', borderLeft: '2px solid #f97316',
+              position: 'absolute',
+              top: '10px',
+              right: '-10px',
+              width: '80px',
+              height: '80px',
+              backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
+              backgroundSize: '10px 10px',
+              zIndex: 0,
             }} />
             <div style={{
-              position: 'absolute', bottom: '-6px', right: '-6px', width: '16px', height: '16px',
-              borderBottom: '2px solid #f97316', borderRight: '2px solid #f97316',
+              position: 'absolute',
+              bottom: '10px',
+              left: '-10px',
+              width: '80px',
+              height: '80px',
+              backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
+              backgroundSize: '10px 10px',
+              zIndex: 0,
             }} />
+
+            {/* Avatar image */}
             <div
               style={{
-                width: '280px',
-                height: '340px',
-                overflow: 'hidden',
-                border: '1px solid #1e1e1e',
                 position: 'relative',
+                width: '280px',
+                height: '280px',
+                zIndex: 1,
               }}
             >
               <Image
-                src="/profile.png"
-                alt="Lawal Ab Oluwaseun"
+                src="/avatar.png"
+                alt="Developer avatar"
                 fill
-                className="object-cover object-top"
+                className="object-contain"
               />
             </div>
           </div>
@@ -128,7 +157,7 @@ export default function About() {
           .about-grid {
             grid-template-columns: 1fr !important;
           }
-          .about-photo {
+          .about-avatar {
             display: none;
           }
         }
