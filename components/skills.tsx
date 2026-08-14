@@ -3,7 +3,7 @@
 import {
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiNodedotjs,
   SiPython, SiMongodb, SiGithub, SiFigma, SiLinux, SiSolidity,
-  SiFlutter, SiFirebase, SiTailwindcss, SiHtml5, SiCss3,
+  SiFlutter, SiFirebase, SiTailwindcss, SiHtml5, SiCss,
 } from 'react-icons/si'
 
 function ReactNativeIcon({ size = 28, color = '#61dafb' }: { size?: number; color?: string }) {
@@ -16,7 +16,7 @@ function ReactNativeIcon({ size = 28, color = '#61dafb' }: { size?: number; colo
 
 const skills = [
   { name: 'HTML5',         Icon: SiHtml5,           color: '#e34f26' },
-  { name: 'CSS3',          Icon: SiCss3,            color: '#1572b6' },
+  { name: 'CSS3',          Icon: SiCss,             color: '#1572b6' },
   { name: 'JavaScript',    Icon: SiJavascript,      color: '#f7df1e' },
   { name: 'TypeScript',    Icon: SiTypescript,      color: '#3178c6' },
   { name: 'React.js',      Icon: SiReact,           color: '#61dafb' },
