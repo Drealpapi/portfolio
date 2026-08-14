@@ -111,24 +111,32 @@ export default function Hero() {
             }}
           >
             Building modern web &amp; mobile apps across insurance, fintech,
-            and service platforms. Currently working on{' '}
-            <span style={{ color: '#f97316' }}>AMMC Insurance Platform</span>.
+            and service platforms. Recently shipped{' '}
+            <a
+              href="https://www.ammcbuildersinsurance.com"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{ color: '#f97316', textDecoration: 'none', borderBottom: '1px solid rgba(249,115,22,0.3)' }}
+            >
+              AMMC Insurance Platform
+            </a>
+            .
           </p>
 
-          {/* Currently working on tag */}
+          {/* Status tag */}
           <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
             <span
               style={{
                 width: '6px',
                 height: '6px',
                 borderRadius: '50%',
-                background: '#f97316',
+                background: '#22c55e',
                 display: 'inline-block',
                 animation: 'pulse 2s infinite',
               }}
             />
             <span style={{ color: '#555', fontSize: '0.75rem', fontFamily: 'inherit' }}>
-              Currently working on Portfolio
+              Open to new opportunities
             </span>
           </div>
 

@@ -27,6 +27,10 @@
     font-family: 'Courier New', 'Consolas', monospace;
     overflow-x: hidden;
     cursor: default;
+    /* Subtle dot grid */
+    background-image: radial-gradient(circle, #1e1e1e 1px, transparent 1px);
+    background-size: 28px 28px;
+    background-attachment: fixed;
   }
 
   a, button, [role="button"], input, textarea, select, label {

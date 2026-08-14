@@ -10,7 +10,7 @@ const projects = [
     description:
       'Digital platform streamlining Builders Liability Insurance for construction projects. Centralized experience for stakeholders to submit, manage, verify, and track insurance policies.',
     tech: ['Next.js', 'TypeScript', 'Node.js', 'MongoDB'],
-    live: '',
+    live: 'https://www.ammcbuildersinsurance.com',
     github: '',
     article: '',
     featured: true,
