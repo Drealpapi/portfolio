@@ -65,7 +65,7 @@ export default function About() {
               }}
             >
               {[
-                { val: '2+', label: 'Years Experience' },
+                { val: '4+', label: 'Years Experience' },
                 { val: '5+', label: 'Projects Shipped' },
                 { val: '3', label: 'Organisations' },
               ].map((s) => (
