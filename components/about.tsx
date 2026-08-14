@@ -1,6 +1,5 @@
 'use client'
 
-import Image from 'next/image'
 import { Download } from 'lucide-react'
 
 export default function About() {
@@ -110,7 +109,7 @@ export default function About() {
               position: 'relative',
             }}
           >
-            {/* Dot grid decoration behind avatar */}
+            {/* Dot grid decoration — top right */}
             <div style={{
               position: 'absolute',
               top: '10px',
@@ -132,7 +131,7 @@ export default function About() {
               zIndex: 0,
             }} />
 
-            {/* Avatar image */}
+            {/* Avatar — uses avatar.png if available, SVG fallback otherwise */}
             <div
               style={{
                 position: 'relative',
@@ -141,11 +140,45 @@ export default function About() {
                 zIndex: 1,
               }}
             >
-              <Image
+              <img
                 src="/avatar.png"
                 alt="Developer avatar"
-                fill
-                className="object-contain"
+                style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+                onError={(e) => {
+                  const target = e.currentTarget
+                  target.style.display = 'none'
+                  const parent = target.parentElement
+                  if (parent) {
+                    parent.innerHTML = `
+                      <svg viewBox="0 0 200 220" xmlns="http://www.w3.org/2000/svg" width="280" height="280">
+                        <!-- hoodie body -->
+                        <ellipse cx="100" cy="200" rx="70" ry="30" fill="#1a1a2e"/>
+                        <path d="M40 150 Q30 180 35 220 L165 220 Q170 180 160 150 Q130 165 100 165 Q70 165 40 150Z" fill="#2a2a4a"/>
+                        <!-- hood -->
+                        <path d="M55 100 Q45 80 50 60 Q60 30 100 28 Q140 30 150 60 Q155 80 145 100 Q130 115 100 118 Q70 115 55 100Z" fill="#2a2a4a"/>
+                        <!-- face -->
+                        <circle cx="100" cy="85" r="38" fill="#c8845a"/>
+                        <!-- eyes -->
+                        <circle cx="87" cy="80" r="6" fill="#111"/>
+                        <circle cx="113" cy="80" r="6" fill="#111"/>
+                        <circle cx="89" cy="78" r="2" fill="white"/>
+                        <circle cx="115" cy="78" r="2" fill="white"/>
+                        <!-- smile -->
+                        <path d="M90 95 Q100 104 110 95" stroke="#7a4a2a" strokeWidth="2" fill="none" strokeLinecap="round"/>
+                        <!-- laptop -->
+                        <rect x="45" y="148" width="110" height="68" rx="6" fill="#b0b8c8"/>
+                        <rect x="50" y="153" width="100" height="55" rx="4" fill="#0a0a1a"/>
+                        <!-- skull sticker -->
+                        <circle cx="100" cy="178" r="10" fill="white"/>
+                        <circle cx="96" cy="176" r="2.5" fill="#111"/>
+                        <circle cx="104" cy="176" r="2.5" fill="#111"/>
+                        <path d="M95 183 L97 181 L100 183 L103 181 L105 183" stroke="#111" strokeWidth="1.5" fill="none"/>
+                        <!-- laptop base -->
+                        <rect x="38" y="216" width="124" height="6" rx="3" fill="#8a929e"/>
+                      </svg>
+                    `
+                  }
+                }}
               />
             </div>
           </div>

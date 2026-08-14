@@ -62,8 +62,7 @@ export default function Hero() {
           gridTemplateColumns: '1fr auto',
           gap: '3rem',
           alignItems: 'center',
-        }}
-        className="hero-grid"
+        }}        className="hero-grid"
       >
         {/* Left — text */}
         <div style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
@@ -180,38 +179,6 @@ export default function Hero() {
             position: 'absolute', bottom: '-8px', right: '-8px', width: '20px', height: '20px',
             borderBottom: '2px solid #f97316', borderRight: '2px solid #f97316', zIndex: 2,
           }} />
-
-          {/* Currently working on tag — below photo like reference */}
-          <div
-            style={{
-              position: 'absolute',
-              bottom: '-40px',
-              left: '50%',
-              transform: 'translateX(-50%)',
-              whiteSpace: 'nowrap',
-              display: 'flex',
-              alignItems: 'center',
-              gap: '0.375rem',
-              background: '#111',
-              border: '1px solid #222',
-              padding: '4px 10px',
-              fontSize: '0.7rem',
-              color: '#666',
-              fontFamily: 'inherit',
-              zIndex: 2,
-            }}
-          >
-            <span style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#f97316', display: 'inline-block' }} />
-            Currently working on{' '}
-            <a
-              href="https://www.ammcbuildersinsurance.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{ color: '#f97316', textDecoration: 'none' }}
-            >
-              AMMC
-            </a>
-          </div>
 
           <div
             style={{
