@@ -1,33 +1,43 @@
 'use client'
 
-import { useRef } from 'react'
+import { useRef, useState } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { ArrowUpRight, Clock, Calendar } from 'lucide-react'
+
+// Screenshot via microlink — free, no key needed
+const shot = (url: string) =>
+  `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
+
+const MEDIUM_PROFILE = 'https://medium.com/@seunlawal18'
 
 const posts = [
   {
     id: 1,
-    title: 'Back VS Front-end first when implementing new API calls',
+    title: 'How Clipboard Hijacking Silently Steals Crypto — And Why You\'ll Never Notice',
     excerpt:
-      'Exploring the strategic decision of whether to build your API layer or UI components first, and how this choice impacts development velocity and code quality.',
-    category: 'Architecture',
-    readTime: '5 min read',
-    date: 'Mar 15, 2024',
+      'A deep-dive security writeup on clipboard hijacking attacks targeting crypto wallet addresses. Demonstrates how malware silently swaps wallet prefixes and what developers and users can do to stay protected.',
+    category: 'Cybersecurity',
+    readTime: '6 min read',
+    date: 'Mar 2024',
+    tags: ['Security', 'Crypto', 'Malware'],
+    href: 'https://medium.com/@seunlawal18/how-clipboard-hijacking-silently-steals-crypto-and-why-youll-never-notice-f37cc3baef13',
+    preview: shot('https://medium.com/@seunlawal18/how-clipboard-hijacking-silently-steals-crypto-and-why-youll-never-notice-f37cc3baef13'),
     gradient: 'linear-gradient(135deg, #1a0a00 0%, #2d1200 100%)',
     accentColor: '#f97316',
-    tags: ['API', 'Architecture', 'Best Practices'],
   },
   {
     id: 2,
-    title: 'User-testing my Pini N\' Patches app — what I learned',
+    title: 'Back VS Front-end First When Implementing New API Calls',
     excerpt:
-      'A deep dive into the user testing process for my latest project, uncovering surprising insights about UX patterns and how real users interact with interfaces.',
-    category: 'UX Research',
-    readTime: '7 min read',
-    date: 'Feb 28, 2024',
+      'Exploring the strategic decision of whether to build your API layer or UI components first, and how this choice impacts development velocity and code quality across different project types.',
+    category: 'Architecture',
+    readTime: '5 min read',
+    date: 'Feb 2024',
+    tags: ['API', 'Architecture', 'Best Practices'],
+    href: MEDIUM_PROFILE,
+    preview: shot(MEDIUM_PROFILE),
     gradient: 'linear-gradient(135deg, #0a0a1a 0%, #12122d 100%)',
     accentColor: '#fb923c',
-    tags: ['UX', 'Testing', 'Product'],
   },
   {
     id: 3,
@@ -36,78 +46,86 @@ const posts = [
       'Reflecting on a 30-day social media detox and its surprising impact on my productivity, creativity, and overall mental health as a software developer.',
     category: 'Lifestyle',
     readTime: '4 min read',
-    date: 'Jan 20, 2024',
+    date: 'Jan 2024',
+    tags: ['Productivity', 'Mental Health', 'Dev Life'],
+    href: MEDIUM_PROFILE,
+    preview: shot(MEDIUM_PROFILE),
     gradient: 'linear-gradient(135deg, #0a1a0a 0%, #122d12 100%)',
     accentColor: '#f97316',
-    tags: ['Productivity', 'Mental Health', 'Dev Life'],
   },
 ]
 
-// Abstract blog post image SVGs
-function BlogImage({ gradient, accentColor, index }: { gradient: string; accentColor: string; index: number }) {
-  return (
-    <div
-      className="w-full h-48 relative overflow-hidden"
-      style={{ background: gradient }}
-    >
-      {/* Abstract pattern */}
-      <svg
-        viewBox="0 0 400 200"
-        fill="none"
-        xmlns="http://www.w3.org/2000/svg"
-        className="absolute inset-0 w-full h-full"
-        preserveAspectRatio="xMidYMid slice"
-      >
-        {/* Grid */}
-        {[0, 1, 2, 3, 4, 5].map((i) => (
-          <line key={`v${i}`} x1={i * 80} y1="0" x2={i * 80} y2="200" stroke={`${accentColor}10`} strokeWidth="1" />
-        ))}
-        {[0, 1, 2, 3].map((i) => (
-          <line key={`h${i}`} x1="0" y1={i * 67} x2="400" y2={i * 67} stroke={`${accentColor}10`} strokeWidth="1" />
-        ))}
+function PreviewImage({
+  src,
+  alt,
+  gradient,
+  accentColor,
+  category,
+}: {
+  src: string
+  alt: string
+  gradient: string
+  accentColor: string
+  category: string
+}) {
+  const [failed, setFailed] = useState(false)
 
-        {/* Decorative elements based on index */}
-        {index === 0 && (
-          <>
-            <circle cx="300" cy="60" r="80" fill={`${accentColor}08`} />
-            <circle cx="300" cy="60" r="50" fill={`${accentColor}10`} />
-            <path d="M50 150 L150 50 L250 120 L350 30" stroke={accentColor} strokeWidth="2" fill="none" strokeOpacity="0.4" />
-            <rect x="60" y="80" width="80" height="8" rx="4" fill={`${accentColor}30`} />
-            <rect x="60" y="96" width="120" height="6" rx="3" fill={`${accentColor}20`} />
-            <rect x="60" y="110" width="100" height="6" rx="3" fill={`${accentColor}15`} />
-            <text x="60" y="60" fill={accentColor} fontSize="14" fontFamily="monospace" opacity="0.6">API</text>
-            <text x="100" y="60" fill="rgba(255,255,255,0.3)" fontSize="14" fontFamily="monospace">&lt;/&gt;</text>
-          </>
-        )}
-        {index === 1 && (
-          <>
-            <rect x="240" y="20" width="140" height="160" rx="12" fill={`${accentColor}08`} stroke={`${accentColor}20`} strokeWidth="1" />
-            <rect x="255" y="35" width="110" height="8" rx="4" fill={`${accentColor}25`} />
-            <rect x="255" y="50" width="80" height="6" rx="3" fill={`${accentColor}15`} />
-            <rect x="255" y="63" width="95" height="6" rx="3" fill={`${accentColor}12`} />
-            <circle cx="100" cy="100" r="60" fill={`${accentColor}06`} />
-            <circle cx="100" cy="100" r="40" fill={`${accentColor}08`} />
-            <text x="70" y="105" fill={accentColor} fontSize="20" opacity="0.5">UX</text>
-          </>
-        )}
-        {index === 2 && (
-          <>
-            <path d="M0 100 Q100 40 200 100 Q300 160 400 100" stroke={accentColor} strokeWidth="2" fill="none" strokeOpacity="0.3" />
-            <path d="M0 120 Q100 60 200 120 Q300 180 400 120" stroke={accentColor} strokeWidth="1" fill="none" strokeOpacity="0.15" />
-            <circle cx="200" cy="100" r="50" fill={`${accentColor}08`} />
-            <text x="160" y="108" fill={accentColor} fontSize="28" opacity="0.4">✦</text>
-            <rect x="40" y="60" width="60" height="6" rx="3" fill={`${accentColor}20`} />
-            <rect x="40" y="74" width="80" height="5" rx="2.5" fill={`${accentColor}12`} />
-          </>
-        )}
-      </svg>
-
-      {/* Overlay gradient */}
+  if (failed) {
+    return (
       <div
-        className="absolute inset-0"
-        style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.8) 0%, transparent 60%)' }}
-      />
+        className="w-full h-48 relative overflow-hidden"
+        style={{ background: gradient }}
+      >
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage: `linear-gradient(${accentColor}10 1px, transparent 1px), linear-gradient(90deg, ${accentColor}10 1px, transparent 1px)`,
+            backgroundSize: '40px 40px',
+          }}
+        />
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.8) 0%, transparent 60%)' }}
+        />
+        <div className="absolute top-4 left-4">
+          <span
+            className="text-xs font-semibold px-3 py-1 rounded-full"
+            style={{
+              background: `${accentColor}20`,
+              color: accentColor,
+              border: `1px solid ${accentColor}30`,
+            }}
+          >
+            {category}
+          </span>
+        </div>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span style={{ color: accentColor, opacity: 0.3, fontSize: '2rem' }}>✦</span>
+        </div>
+      </div>
+    )
+  }
 
+  return (
+    <div className="w-full h-48 relative overflow-hidden" style={{ background: gradient }}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={src}
+        alt={alt}
+        style={{
+          width: '100%',
+          height: '100%',
+          objectFit: 'cover',
+          objectPosition: 'top',
+          display: 'block',
+        }}
+        onError={() => setFailed(true)}
+      />
+      {/* Gradient overlay */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{ background: 'linear-gradient(to top, rgba(13,13,13,0.85) 0%, transparent 55%)' }}
+      />
       {/* Category badge */}
       <div className="absolute top-4 left-4">
         <span
@@ -118,7 +136,7 @@ function BlogImage({ gradient, accentColor, index }: { gradient: string; accentC
             border: `1px solid ${accentColor}30`,
           }}
         >
-          {posts[index].category}
+          {category}
         </span>
       </div>
     </div>
@@ -160,7 +178,7 @@ export default function Blog() {
         >
           <div>
             <span className="text-orange-400 text-sm font-medium tracking-[0.3em] uppercase">
-              Thoughts & Insights
+              Thoughts &amp; Insights
             </span>
             <h2 className="text-4xl lg:text-5xl font-black text-white mt-3">
               Blog <span className="gradient-text">Posts</span>
@@ -171,9 +189,17 @@ export default function Blog() {
           </div>
 
           <motion.a
-            href="#"
-            className="btn-outline-orange px-6 py-3 rounded-xl text-sm font-semibold flex items-center gap-2 self-start lg:self-auto"
-            whileHover={{ scale: 1.03 }}
+            href={MEDIUM_PROFILE}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="self-start lg:self-auto flex items-center gap-2 text-sm font-semibold px-6 py-3 rounded-xl transition-colors duration-200"
+            style={{
+              border: '1px solid rgba(249,115,22,0.4)',
+              color: '#f97316',
+              background: 'transparent',
+              textDecoration: 'none',
+            }}
+            whileHover={{ scale: 1.03, backgroundColor: 'rgba(249,115,22,0.08)' }}
             whileTap={{ scale: 0.97 }}
           >
             View All Posts
@@ -200,15 +226,28 @@ export default function Blog() {
                 boxShadow: '0 20px 50px rgba(249,115,22,0.1)',
               }}
             >
-              {/* Image */}
-              <div className="overflow-hidden">
+              {/* Preview image */}
+              <a
+                href={post.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block overflow-hidden"
+                tabIndex={-1}
+                aria-hidden="true"
+              >
                 <motion.div
                   whileHover={{ scale: 1.04 }}
                   transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                 >
-                  <BlogImage gradient={post.gradient} accentColor={post.accentColor} index={i} />
+                  <PreviewImage
+                    src={post.preview}
+                    alt={`${post.title} preview`}
+                    gradient={post.gradient}
+                    accentColor={post.accentColor}
+                    category={post.category}
+                  />
                 </motion.div>
-              </div>
+              </a>
 
               {/* Content */}
               <div className="p-6">
@@ -253,8 +292,11 @@ export default function Blog() {
 
                 {/* Read more */}
                 <motion.a
-                  href="#"
+                  href={post.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center gap-2 text-sm font-semibold text-orange-400 group/link"
+                  style={{ textDecoration: 'none' }}
                   whileHover={{ x: 4 }}
                   transition={{ duration: 0.2 }}
                 >
