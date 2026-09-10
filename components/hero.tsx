@@ -143,51 +143,34 @@ export default function Hero() {
           style={{
             position: 'relative',
             width: '260px',
+            height: '260px',
             flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
           }}
           className="hero-photo"
         >
-          {/* Dot grid decoration — top right */}
+          {/* Glow ring behind the circle */}
           <div style={{
             position: 'absolute',
-            top: '-16px',
-            right: '-16px',
-            width: '70px',
-            height: '70px',
-            backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
-            backgroundSize: '10px 10px',
+            width: '300px',
+            height: '300px',
+            borderRadius: '50%',
+            background: 'radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%)',
             zIndex: 0,
-          }} />
-          {/* Dot grid decoration — bottom left */}
-          <div style={{
-            position: 'absolute',
-            bottom: '-16px',
-            left: '-16px',
-            width: '70px',
-            height: '70px',
-            backgroundImage: 'radial-gradient(circle, #2a2a2a 1.5px, transparent 1.5px)',
-            backgroundSize: '10px 10px',
-            zIndex: 0,
-          }} />
-
-          {/* Corner brackets */}
-          <div style={{
-            position: 'absolute', top: '-8px', left: '-8px', width: '20px', height: '20px',
-            borderTop: '2px solid #f97316', borderLeft: '2px solid #f97316', zIndex: 2,
-          }} />
-          <div style={{
-            position: 'absolute', bottom: '-8px', right: '-8px', width: '20px', height: '20px',
-            borderBottom: '2px solid #f97316', borderRight: '2px solid #f97316', zIndex: 2,
           }} />
 
           <div
             style={{
               width: '260px',
-              height: '320px',
+              height: '260px',
+              borderRadius: '50%',
               overflow: 'hidden',
-              border: '1px solid #222',
+              border: '2px solid #f97316',
               position: 'relative',
               zIndex: 1,
+              boxShadow: '0 0 0 5px #0d0d0d, 0 0 0 7px rgba(249,115,22,0.25)',
             }}
           >
             <Image
