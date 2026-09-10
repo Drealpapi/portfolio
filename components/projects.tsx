@@ -1,8 +1,8 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import { ExternalLink, Github, BookOpen } from 'lucide-react'
 
-// Screenshot via microlink — free, no key needed
 const shot = (url: string) =>
   `https://api.microlink.io/?url=${encodeURIComponent(url)}&screenshot=true&meta=false&embed=screenshot.url`
 
@@ -74,127 +74,103 @@ const projects = [
   },
 ]
 
-function PreviewPlaceholder({ title, category }: { title: string; category: string }) {
+function useCardInView() {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+  return { ref, visible }
+}
+
+function PreviewPlaceholder({ category }: { category: string }) {
   return (
-    <div
-      style={{
-        width: '100%',
-        height: '160px',
-        background: '#0d0d0d',
-        borderBottom: '1px solid #1a1a1a',
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
-        justifyContent: 'center',
-        gap: '0.5rem',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
-      {/* Grid lines decoration */}
+    <div style={{
+      width: '100%', height: '160px', background: '#0d0d0d',
+      borderBottom: '1px solid #1a1a1a', display: 'flex',
+      flexDirection: 'column', alignItems: 'center', justifyContent: 'center',
+      gap: '0.5rem', position: 'relative', overflow: 'hidden',
+    }}>
       <div style={{
         position: 'absolute', inset: 0,
         backgroundImage: 'linear-gradient(#1a1a1a 1px, transparent 1px), linear-gradient(90deg, #1a1a1a 1px, transparent 1px)',
-        backgroundSize: '40px 40px',
-        opacity: 0.5,
+        backgroundSize: '40px 40px', opacity: 0.5,
       }} />
-      <span style={{ color: '#2a2a2a', fontSize: '2rem', zIndex: 1 }}>⬛</span>
       <span style={{ color: '#333', fontSize: '0.7rem', fontFamily: 'inherit', zIndex: 1 }}>{category}</span>
     </div>
   )
 }
 
-function ProjectCard({ project }: { project: typeof projects[0] }) {
+function ProjectCard({ project, delay }: { project: typeof projects[0]; delay: number }) {
+  const { ref, visible } = useCardInView()
   const hasLink = project.live || project.github || project.article
   const primaryLink = project.live || project.article || project.github || ''
 
   return (
-    <div className="project-card" style={{ display: 'flex', flexDirection: 'column' }}>
-
-      {/* Preview image */}
+    <div
+      ref={ref}
+      className="project-card"
+      style={{
+        display: 'flex', flexDirection: 'column',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0)' : 'translateY(28px)',
+        transition: `opacity 0.6s ease ${delay}s, transform 0.6s ease ${delay}s`,
+      }}
+    >
       {project.preview ? (
-        <a
-          href={primaryLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          style={{ display: 'block', overflow: 'hidden', borderBottom: '1px solid #1a1a1a' }}
-        >
+        <a href={primaryLink} target="_blank" rel="noopener noreferrer"
+          style={{ display: 'block', overflow: 'hidden', borderBottom: '1px solid #1a1a1a' }}>
           <img
-            src={project.preview}
-            alt={`${project.title} preview`}
+            src={project.preview} alt={`${project.title} preview`}
             style={{
-              width: '100%',
-              height: '160px',
-              objectFit: 'cover',
-              objectPosition: 'top',
-              display: 'block',
-              transition: 'transform 0.3s ease',
+              width: '100%', height: '160px', objectFit: 'cover',
+              objectPosition: 'top', display: 'block', transition: 'transform 0.3s ease',
             }}
             onMouseEnter={(e) => (e.currentTarget.style.transform = 'scale(1.03)')}
             onMouseLeave={(e) => (e.currentTarget.style.transform = 'scale(1)')}
             onError={(e) => {
-              // fallback to placeholder on error
               const wrapper = e.currentTarget.parentElement
               if (wrapper) {
-                wrapper.innerHTML = `
-                  <div style="width:100%;height:160px;background:#0d0d0d;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;">
-                    <div style="position:absolute;inset:0;background-image:linear-gradient(#1a1a1a 1px,transparent 1px),linear-gradient(90deg,#1a1a1a 1px,transparent 1px);background-size:40px 40px;opacity:0.5;"></div>
-                    <span style="color:#2e2e2e;font-size:0.75rem;font-family:monospace;z-index:1;">${project.category}</span>
-                  </div>
-                `
+                wrapper.innerHTML = `<div style="width:100%;height:160px;background:#0d0d0d;border-bottom:1px solid #1a1a1a;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;"><div style="position:absolute;inset:0;background-image:linear-gradient(#1a1a1a 1px,transparent 1px),linear-gradient(90deg,#1a1a1a 1px,transparent 1px);background-size:40px 40px;opacity:0.5;"></div><span style="color:#2e2e2e;font-size:0.75rem;font-family:monospace;z-index:1;">${project.category}</span></div>`
               }
             }}
           />
         </a>
       ) : (
-        <PreviewPlaceholder title={project.title} category={project.category} />
+        <PreviewPlaceholder category={project.category} />
       )}
 
-      {/* Header bar */}
-      <div
-        style={{
-          padding: '0.5rem 1rem',
-          borderBottom: '1px solid #1a1a1a',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-        }}
-      >
-        <span style={{ color: '#f97316', fontSize: '0.7rem', fontFamily: 'inherit' }}>
-          {project.category}
-        </span>
+      <div style={{
+        padding: '0.5rem 1rem', borderBottom: '1px solid #1a1a1a',
+        display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+      }}>
+        <span style={{ color: '#f97316', fontSize: '0.7rem', fontFamily: 'inherit' }}>{project.category}</span>
         {project.featured && (
-          <span style={{
-            fontSize: '0.6rem', padding: '1px 7px',
-            border: '1px solid #f97316', color: '#f97316', fontFamily: 'inherit',
-          }}>
+          <span style={{ fontSize: '0.6rem', padding: '1px 7px', border: '1px solid #f97316', color: '#f97316', fontFamily: 'inherit' }}>
             featured
           </span>
         )}
       </div>
 
-      {/* Body */}
       <div style={{ padding: '0.875rem 1rem', flex: 1, display: 'flex', flexDirection: 'column', gap: '0.625rem' }}>
-        <h3 style={{ color: '#fff', fontSize: '0.9375rem', fontWeight: 600, fontFamily: 'inherit' }}>
-          {project.title}
-        </h3>
-        <p style={{ color: '#666', fontSize: '0.8rem', lineHeight: 1.6, fontFamily: 'inherit', flex: 1 }}>
-          {project.description}
-        </p>
+        <h3 style={{ color: '#fff', fontSize: '0.9375rem', fontWeight: 600, fontFamily: 'inherit' }}>{project.title}</h3>
+        <p style={{ color: '#666', fontSize: '0.8rem', lineHeight: 1.6, fontFamily: 'inherit', flex: 1 }}>{project.description}</p>
 
-        {/* Tech tags */}
         <div style={{ display: 'flex', flexWrap: 'wrap', gap: '0.3rem' }}>
           {project.tech.map((t) => (
-            <span key={t} style={{
-              fontSize: '0.68rem', color: '#555',
-              border: '1px solid #1e1e1e', padding: '1px 7px', fontFamily: 'inherit',
-            }}>
+            <span key={t} style={{ fontSize: '0.68rem', color: '#555', border: '1px solid #1e1e1e', padding: '1px 7px', fontFamily: 'inherit' }}>
               {t}
             </span>
           ))}
         </div>
 
-        {/* Links */}
         <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.25rem', flexWrap: 'wrap' }}>
           {project.live && (
             <a href={project.live} target="_blank" rel="noopener noreferrer"
@@ -226,32 +202,40 @@ function ProjectCard({ project }: { project: typeof projects[0] }) {
 }
 
 export default function Projects() {
+  const headingRef = useRef<HTMLDivElement>(null)
+  const [headingVisible, setHeadingVisible] = useState(false)
+
+  useEffect(() => {
+    const el = headingRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeadingVisible(true); obs.disconnect() } },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section
-      id="projects"
-      style={{
-        background: 'transparent',
-        padding: '5rem 1.5rem',
-        borderTop: '1px solid #111',
-      }}
-    >
+    <section id="projects" style={{ background: 'transparent', padding: '5rem 1.5rem', borderTop: '1px solid #111' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        {/* Section heading */}
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2.5rem' }}>
+        <div
+          ref={headingRef}
+          style={{
+            display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+            marginBottom: '2.5rem',
+            opacity: headingVisible ? 1 : 0,
+            transform: headingVisible ? 'translateY(0)' : 'translateY(-20px)',
+            transition: 'opacity 0.6s ease, transform 0.6s ease',
+          }}
+        >
           <div style={{ display: 'flex', alignItems: 'center', flex: 1 }}>
-            <h2 className="section-heading">
-              <span className="hash">#</span>projects
-            </h2>
+            <h2 className="section-heading"><span className="hash">#</span>projects</h2>
             <div className="section-divider" style={{ maxWidth: '200px' }} />
           </div>
           <a
-            href="https://github.com/Drealpapi"
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              color: '#555', fontSize: '0.8125rem', fontFamily: 'inherit',
-              textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem',
-            }}
+            href="https://github.com/Drealpapi" target="_blank" rel="noopener noreferrer"
+            style={{ color: '#555', fontSize: '0.8125rem', fontFamily: 'inherit', textDecoration: 'none', whiteSpace: 'nowrap', marginLeft: '1rem' }}
             onMouseEnter={(e) => (e.currentTarget.style.color = '#f97316')}
             onMouseLeave={(e) => (e.currentTarget.style.color = '#555')}
           >
@@ -259,14 +243,9 @@ export default function Projects() {
           </a>
         </div>
 
-        {/* Grid */}
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))',
-          gap: '1rem',
-        }}>
-          {projects.map((p) => (
-            <ProjectCard key={p.id} project={p} />
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(300px, 1fr))', gap: '1rem' }}>
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} delay={i * 0.1} />
           ))}
         </div>
       </div>

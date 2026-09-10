@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect, useRef, useState } from 'react'
 import {
   SiJavascript, SiTypescript, SiReact, SiNextdotjs, SiNodedotjs,
   SiPython, SiMongodb, SiGithub, SiFigma, SiLinux, SiSolidity,
@@ -15,67 +16,90 @@ function ReactNativeIcon({ size = 28, color = '#61dafb' }: { size?: number; colo
 }
 
 const skills = [
-  { name: 'HTML5',         Icon: SiHtml5,           color: '#e34f26' },
-  { name: 'CSS3',          Icon: SiCss,             color: '#1572b6' },
-  { name: 'JavaScript',    Icon: SiJavascript,      color: '#f7df1e' },
-  { name: 'TypeScript',    Icon: SiTypescript,      color: '#3178c6' },
-  { name: 'React.js',      Icon: SiReact,           color: '#61dafb' },
-  { name: 'React Native',  Icon: ReactNativeIcon,   color: '#61dafb' },
-  { name: 'Next.js',       Icon: SiNextdotjs,       color: '#fff' },
-  { name: 'Tailwind',      Icon: SiTailwindcss,     color: '#38bdf8' },
-  { name: 'Node.js',       Icon: SiNodedotjs,       color: '#6cc24a' },
-  { name: 'Python',        Icon: SiPython,          color: '#3776ab' },
-  { name: 'MongoDB',       Icon: SiMongodb,         color: '#47a248' },
-  { name: 'Firebase',      Icon: SiFirebase,        color: '#ffca28' },
-  { name: 'Flutter',       Icon: SiFlutter,         color: '#54c5f8' },
-  { name: 'Solidity',      Icon: SiSolidity,        color: '#a0aec0' },
-  { name: 'GitHub',        Icon: SiGithub,          color: '#fff' },
-  { name: 'Linux / Kali',  Icon: SiLinux,           color: '#fcc624' },
-  { name: 'Figma',         Icon: SiFigma,           color: '#f24e1e' },
+  { name: 'HTML5',        Icon: SiHtml5,         color: '#e34f26' },
+  { name: 'CSS3',         Icon: SiCss,           color: '#1572b6' },
+  { name: 'JavaScript',   Icon: SiJavascript,    color: '#f7df1e' },
+  { name: 'TypeScript',   Icon: SiTypescript,    color: '#3178c6' },
+  { name: 'React.js',     Icon: SiReact,         color: '#61dafb' },
+  { name: 'React Native', Icon: ReactNativeIcon, color: '#61dafb' },
+  { name: 'Next.js',      Icon: SiNextdotjs,     color: '#fff'    },
+  { name: 'Tailwind',     Icon: SiTailwindcss,   color: '#38bdf8' },
+  { name: 'Node.js',      Icon: SiNodedotjs,     color: '#6cc24a' },
+  { name: 'Python',       Icon: SiPython,        color: '#3776ab' },
+  { name: 'MongoDB',      Icon: SiMongodb,       color: '#47a248' },
+  { name: 'Firebase',     Icon: SiFirebase,      color: '#ffca28' },
+  { name: 'Flutter',      Icon: SiFlutter,       color: '#54c5f8' },
+  { name: 'Solidity',     Icon: SiSolidity,      color: '#a0aec0' },
+  { name: 'GitHub',       Icon: SiGithub,        color: '#fff'    },
+  { name: 'Linux / Kali', Icon: SiLinux,         color: '#fcc624' },
+  { name: 'Figma',        Icon: SiFigma,         color: '#f24e1e' },
 ]
 
-export default function Skills() {
+function SkillItem({ skill, delay }: { skill: typeof skills[0]; delay: number }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const [visible, setVisible] = useState(false)
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setVisible(true); obs.disconnect() } },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
   return (
-    <section
-      id="skills"
+    <div
+      ref={ref}
+      className="skill-box"
       style={{
-        background: '#0a0a0a',
-        padding: '5rem 1.5rem',
-        borderTop: '1px solid #111',
+        opacity: visible ? 1 : 0,
+        transform: visible ? 'translateY(0) scale(1)' : 'translateY(20px) scale(0.95)',
+        transition: `opacity 0.5s ease ${delay}s, transform 0.5s ease ${delay}s`,
       }}
     >
+      <skill.Icon size={32} color={skill.color} />
+      <span style={{ color: '#666', fontSize: '0.7rem', textAlign: 'center', fontFamily: 'inherit', lineHeight: 1.3 }}>
+        {skill.name}
+      </span>
+    </div>
+  )
+}
+
+export default function Skills() {
+  const headingRef = useRef<HTMLDivElement>(null)
+  const [headingVisible, setHeadingVisible] = useState(false)
+  useEffect(() => {
+    const el = headingRef.current
+    if (!el) return
+    const obs = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) { setHeadingVisible(true); obs.disconnect() } },
+      { threshold: 0.1 }
+    )
+    obs.observe(el)
+    return () => obs.disconnect()
+  }, [])
+
+  return (
+    <section id="skills" style={{ background: '#0a0a0a', padding: '5rem 1.5rem', borderTop: '1px solid #111' }}>
       <div style={{ maxWidth: '1100px', margin: '0 auto' }}>
-        {/* Section heading */}
-        <div style={{ display: 'flex', alignItems: 'center', marginBottom: '2.5rem' }}>
-          <h2 className="section-heading">
-            <span className="hash">#</span>skills
-          </h2>
+        <div
+          ref={headingRef}
+          style={{
+            display: 'flex', alignItems: 'center', marginBottom: '2.5rem',
+            opacity: headingVisible ? 1 : 0,
+            transform: headingVisible ? 'translateY(0)' : 'translateY(-20px)',
+            transition: 'opacity 0.6s ease, transform 0.6s ease',
+          }}
+        >
+          <h2 className="section-heading"><span className="hash">#</span>skills</h2>
           <div className="section-divider" />
         </div>
 
-        {/* Icon grid */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))',
-            gap: '0.75rem',
-          }}
-        >
-          {skills.map((s) => (
-            <div key={s.name} className="skill-box">
-              <s.Icon size={32} color={s.color} />
-              <span
-                style={{
-                  color: '#666',
-                  fontSize: '0.7rem',
-                  textAlign: 'center',
-                  fontFamily: 'inherit',
-                  lineHeight: 1.3,
-                }}
-              >
-                {s.name}
-              </span>
-            </div>
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(100px, 1fr))', gap: '0.75rem' }}>
+          {skills.map((s, i) => (
+            <SkillItem key={s.name} skill={s} delay={Math.floor(i / 4) * 0.1} />
           ))}
         </div>
       </div>
