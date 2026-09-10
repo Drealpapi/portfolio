@@ -2,7 +2,6 @@
 
 import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
-import { Download } from 'lucide-react'
 
 const roles = [
   'Senior Full Stack Developer',
@@ -16,10 +15,7 @@ export default function Hero() {
   const [displayed, setDisplayed] = useState('')
   const [typing, setTyping] = useState(true)
   const [mounted, setMounted] = useState(false)
-  const textRef = useRef<HTMLDivElement>(null)
-  const photoRef = useRef<HTMLDivElement>(null)
 
-  // Trigger entrance on mount
   useEffect(() => {
     const t = setTimeout(() => setMounted(true), 80)
     return () => clearTimeout(t)
@@ -45,10 +41,6 @@ export default function Hero() {
     return () => clearTimeout(timeout)
   }, [displayed, typing, roleIndex])
 
-  const scrollDown = () => {
-    document.querySelector('#projects')?.scrollIntoView({ behavior: 'smooth' })
-  }
-
   return (
     <section
       id="home"
@@ -62,6 +54,7 @@ export default function Hero() {
       }}
     >
       <div
+        className="hero-grid"
         style={{
           maxWidth: '1100px',
           margin: '0 auto',
@@ -72,16 +65,15 @@ export default function Hero() {
           gap: '3rem',
           alignItems: 'center',
         }}
-        className="hero-grid"
       >
-        {/* Left — text slides in from left */}
+        {/* Left — text */}
         <div
-          ref={textRef}
           style={{
             display: 'flex', flexDirection: 'column', gap: '1.25rem',
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateX(0)' : 'translateX(-40px)',
             transition: 'opacity 0.75s ease 0.1s, transform 0.75s ease 0.1s',
+            position: 'relative', zIndex: 2,
           }}
         >
           <p style={{ color: '#666', fontSize: '0.875rem', fontFamily: 'inherit' }}>
@@ -118,41 +110,44 @@ export default function Hero() {
             </a>.
           </p>
 
-          <div style={{ display: 'flex', gap: '0.75rem', flexWrap: 'wrap', marginTop: '0.5rem' }}>
-            <button className="btn-primary" onClick={scrollDown}>Scroll Down ↓</button>
-            <a href="/resume.pdf" download="Lawal_Ab_Oluwaseun_CV.pdf" className="btn-ghost">
-              <Download size={14} />
-              Download CV
-            </a>
-          </div>
+          {/* No buttons here — CV is in About, no Scroll Down needed */}
         </div>
 
-        {/* Right — photo slides in from right */}
+        {/* Right — circular photo */}
         <div
-          ref={photoRef}
           className="hero-photo"
           style={{
-            position: 'relative', width: '260px', height: '260px',
-            flexShrink: 0, display: 'flex', alignItems: 'center', justifyContent: 'center',
+            position: 'relative',
+            flexShrink: 0,
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
             opacity: mounted ? 1 : 0,
             transform: mounted ? 'translateX(0)' : 'translateX(40px)',
             transition: 'opacity 0.75s ease 0.25s, transform 0.75s ease 0.25s',
           }}
         >
-          <div style={{
+          {/* Glow */}
+          <div className="hero-glow" style={{
             position: 'absolute', width: '300px', height: '300px', borderRadius: '50%',
             background: 'radial-gradient(circle, rgba(249,115,22,0.15) 0%, transparent 70%)',
             zIndex: 0,
           }} />
-          <div style={{
+          {/* Photo circle */}
+          <div className="hero-circle" style={{
             width: '260px', height: '260px', borderRadius: '50%',
             overflow: 'hidden', border: '2px solid #f97316',
             position: 'relative', zIndex: 1,
             boxShadow: '0 0 0 5px #0d0d0d, 0 0 0 7px rgba(249,115,22,0.25)',
+            flexShrink: 0,
           }}>
             <Image
-              src="/profile.png" alt="Lawal Ab Oluwaseun"
-              fill className="object-cover object-top" priority
+              src="/profile.png"
+              alt="Lawal Ab Oluwaseun"
+              fill
+              sizes="(max-width: 640px) 160px, 260px"
+              className="object-cover object-top"
+              priority
             />
           </div>
         </div>
@@ -160,8 +155,22 @@ export default function Hero() {
 
       <style>{`
         @media (max-width: 640px) {
-          .hero-grid { grid-template-columns: 1fr !important; }
-          .hero-photo { display: none; }
+          .hero-grid {
+            grid-template-columns: 1fr !important;
+            justify-items: center;
+            gap: 2rem !important;
+          }
+          .hero-photo {
+            order: -1;
+          }
+          .hero-circle {
+            width: 160px !important;
+            height: 160px !important;
+          }
+          .hero-glow {
+            width: 190px !important;
+            height: 190px !important;
+          }
         }
       `}</style>
     </section>

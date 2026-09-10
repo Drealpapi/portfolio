@@ -96,6 +96,9 @@ export default function About() {
               opacity: textCol.visible ? 1 : 0,
               transform: textCol.visible ? 'translateX(0)' : 'translateX(-36px)',
               transition: 'opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s',
+              pointerEvents: 'auto',
+              position: 'relative',
+              zIndex: 2,
             }}
           >
             <p style={{ color: '#e0d8cc', fontSize: '0.9rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
@@ -145,7 +148,7 @@ export default function About() {
                 Contact Me
               </a>
               <a href="/resume.pdf" download="Lawal_Ab_Oluwaseun_CV.pdf" className="btn-ghost">
-                <Download size={14} /> Resume ↓
+                <Download size={14} /> Download CV
               </a>
             </div>
           </div>
@@ -164,6 +167,7 @@ export default function About() {
             <ModelViewer
               src="/model.glb" width="100%" height={460}
               scale={1.6} autoRotate={true} float={true} orbitControls={true}
+              style={{ height: '100%', minHeight: '260px' }}
             />
           </div>
         </div>
@@ -171,8 +175,14 @@ export default function About() {
 
       <style>{`
         @media (max-width: 768px) {
-          .about-grid { grid-template-columns: 1fr !important; }
-          .about-avatar { width: 100%; height: 300px; }
+          .about-grid {
+            grid-template-columns: 1fr !important;
+          }
+          .about-avatar {
+            width: 100% !important;
+            height: 260px !important;
+            min-height: 260px !important;
+          }
         }
       `}</style>
     </section>

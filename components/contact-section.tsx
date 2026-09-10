@@ -114,6 +114,9 @@ export default function ContactSection() {
               opacity: infoCol.visible ? 1 : 0,
               transform: infoCol.visible ? 'translateX(0)' : 'translateX(-36px)',
               transition: 'opacity 0.65s ease 0.1s, transform 0.65s ease 0.1s',
+              pointerEvents: 'auto',
+              position: 'relative',
+              zIndex: 2,
             }}
           >
             <p style={{ color: '#b0a898', fontSize: '0.875rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
@@ -149,6 +152,9 @@ export default function ContactSection() {
               opacity: formCol.visible ? 1 : 0,
               transform: formCol.visible ? 'translateX(0)' : 'translateX(36px)',
               transition: 'opacity 0.65s ease 0.2s, transform 0.65s ease 0.2s',
+              pointerEvents: 'auto',
+              position: 'relative',
+              zIndex: 2,
             }}
           >
             <p style={{ color: '#6a6258', fontSize: '0.75rem', fontFamily: 'inherit', marginBottom: '1rem' }}>
