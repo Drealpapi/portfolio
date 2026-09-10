@@ -64,11 +64,11 @@ export default function ModelViewer({
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
-        {/* Lighting to match dark portfolio theme */}
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[5, 5, 5]} intensity={1.2} color="#ffffff" />
-        <pointLight position={[-3, 2, -3]} intensity={0.6} color="#f97316" />
-        <pointLight position={[3, -2, 3]} intensity={0.3} color="#3b82f6" />
+        {/* Lighting — warm cream + orange to match about section */}
+        <ambientLight intensity={0.7} color="#fff5e8" />
+        <directionalLight position={[5, 5, 5]} intensity={1.4} color="#fffaf0" />
+        <pointLight position={[-3, 2, -2]} intensity={0.8} color="#f97316" />
+        <pointLight position={[3, 0, 3]} intensity={0.4} color="#fcd9a0" />
 
         <Suspense fallback={<Loader />}>
           {float ? (
