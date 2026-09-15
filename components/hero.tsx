@@ -99,8 +99,9 @@ export default function Hero() {
             color: '#666', fontSize: '0.875rem',
             lineHeight: 1.7, maxWidth: '480px', fontFamily: 'inherit',
           }}>
-            Building modern web &amp; mobile apps across insurance, fintech,
-            and service platforms. Recently shipped{' '}
+            Senior software developer based in Lagos, Nigeria — building modern
+            web &amp; mobile apps across insurance, fintech, and service platforms.
+            Recently shipped{' '}
             <a
               href="https://www.ammcbuildersinsurance.com"
               target="_blank" rel="noopener noreferrer"

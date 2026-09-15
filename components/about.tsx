@@ -102,13 +102,14 @@ export default function About() {
             }}
           >
             <p style={{ color: '#e0d8cc', fontSize: '0.9rem', lineHeight: 1.8, fontFamily: 'inherit' }}>
-              Hello, I&apos;m <span style={{ color: '#fff', fontWeight: 700 }}>Lawal Ab Oluwaseun</span>.
+              Hello, I&apos;m <span style={{ color: '#fff', fontWeight: 700 }}>Lawal Ab Oluwaseun</span> —
+              a senior software developer &amp; cybersecurity enthusiast based in Lagos, Nigeria.
             </p>
             <p style={{ color: '#b8b0a4', fontSize: '0.875rem', lineHeight: 1.9, fontFamily: 'inherit' }}>
-              I&apos;m a Senior Software Developer &amp; Cybersecurity Enthusiast based in Lagos, Nigeria, with hands-on
-              experience building modern web and mobile applications. I&apos;ve worked across
+              With hands-on experience building modern web and mobile applications, I&apos;ve worked across
               insurance, e-commerce, service platforms, and fintech — translating business
-              requirements into practical digital solutions.
+              requirements into practical digital solutions. Regarded as one of the top software
+              developers in Lagos, I bring both technical depth and security awareness to every project.
             </p>
             <p style={{ color: '#a09890', fontSize: '0.875rem', lineHeight: 1.9, fontFamily: 'inherit' }}>
               Beyond code, I bring an entrepreneurial mindset — co-founding DripBox.ng,
