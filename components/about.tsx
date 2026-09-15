@@ -167,7 +167,7 @@ export default function About() {
             <ModelViewer
               src="/model.glb" width="100%" height={520}
               scale={2.6} autoRotate={true} float={true} orbitControls={true}
-              style={{ height: '100%', minHeight: '300px' }}
+              style={{ height: '100%', minHeight: '320px' }}
             />
           </div>
         </div>

@@ -1,8 +1,9 @@
 "use client"
 
-import { Suspense, useRef } from "react"
-import { Canvas, useFrame } from "@react-three/fiber"
+import { Suspense, useEffect, useRef } from "react"
+import { Canvas, useFrame, useThree } from "@react-three/fiber"
 import { useGLTF, OrbitControls, ContactShadows, Float } from "@react-three/drei"
+import { Box3, Vector3 } from "three"
 import type { Group } from "three"
 
 interface ModelProps {
@@ -14,6 +15,29 @@ interface ModelProps {
 function Model({ url, scale = 1, autoRotate = false }: ModelProps) {
   const { scene } = useGLTF(url)
   const ref = useRef<Group>(null)
+  const { camera } = useThree()
+
+  // Auto-center & fit camera to bounding box on load
+  useEffect(() => {
+    if (!ref.current) return
+
+    const box = new Box3().setFromObject(ref.current)
+    const center = new Vector3()
+    const size = new Vector3()
+    box.getCenter(center)
+    box.getSize(size)
+
+    // Shift model so its center is at world origin
+    ref.current.position.sub(center)
+
+    // Pull camera back enough to see full model
+    const maxDim = Math.max(size.x, size.y, size.z)
+    const fov = (camera as any).fov * (Math.PI / 180)
+    const dist = Math.abs(maxDim / (2 * Math.tan(fov / 2))) * 1.5
+    camera.position.set(0, 0, dist)
+    camera.lookAt(0, 0, 0)
+    camera.updateProjectionMatrix()
+  }, [scene, camera])
 
   useFrame((_, delta) => {
     if (autoRotate && ref.current) {
@@ -34,7 +58,6 @@ function Loader() {
 }
 
 interface ModelViewerProps {
-  /** Path to the .glb file, relative to /public. E.g. "/model.glb" */
   src: string
   width?: string | number
   height?: string | number
@@ -60,11 +83,10 @@ export default function ModelViewer({
   return (
     <div style={{ width, height, ...style }} className={className}>
       <Canvas
-        camera={{ position: [0, 0.8, 2.8], fov: 50 }}
+        camera={{ position: [0, 0, 5], fov: 45, near: 0.1, far: 1000 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
-        {/* Lighting — warm for cream background */}
         <ambientLight intensity={1.0} color="#fff8f0" />
         <directionalLight position={[5, 5, 5]} intensity={1.6} color="#ffffff" />
         <pointLight position={[-3, 2, -2]} intensity={0.6} color="#f97316" />
@@ -72,21 +94,17 @@ export default function ModelViewer({
 
         <Suspense fallback={<Loader />}>
           {float ? (
-            <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
-              <group position={[0, -0.3, 0]}>
-                <Model url={src} scale={scale} autoRotate={autoRotate} />
-              </group>
+            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.4}>
+              <Model url={src} scale={scale} autoRotate={autoRotate} />
             </Float>
           ) : (
-            <group position={[0, -0.3, 0]}>
-              <Model url={src} scale={scale} autoRotate={autoRotate} />
-            </group>
+            <Model url={src} scale={scale} autoRotate={autoRotate} />
           )}
           <ContactShadows
-            position={[0, -1.8, 0]}
-            opacity={0.25}
-            scale={5}
-            blur={2.5}
+            position={[0, -1.2, 0]}
+            opacity={0.2}
+            scale={6}
+            blur={3}
             color="#f97316"
           />
         </Suspense>
@@ -95,9 +113,8 @@ export default function ModelViewer({
           <OrbitControls
             enablePan={false}
             enableZoom={false}
-            minPolarAngle={Math.PI / 4}
-            maxPolarAngle={Math.PI / 1.8}
-            autoRotate={false}
+            minPolarAngle={Math.PI / 6}
+            maxPolarAngle={Math.PI / 1.6}
           />
         )}
       </Canvas>
