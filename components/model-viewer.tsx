@@ -1,43 +1,13 @@
 "use client"
 
-import { Suspense, useEffect, useRef } from "react"
-import { Canvas, useFrame, useThree } from "@react-three/fiber"
-import { useGLTF, OrbitControls, ContactShadows, Float } from "@react-three/drei"
-import { Box3, Vector3 } from "three"
+import { Suspense, useRef } from "react"
+import { Canvas, useFrame } from "@react-three/fiber"
+import { useGLTF, OrbitControls, ContactShadows, Float, Center } from "@react-three/drei"
 import type { Group } from "three"
 
-interface ModelProps {
-  url: string
-  scale?: number
-  autoRotate?: boolean
-}
-
-function Model({ url, scale = 1, autoRotate = false }: ModelProps) {
+function Model({ url, scale = 1, autoRotate = false }: { url: string; scale?: number; autoRotate?: boolean }) {
   const { scene } = useGLTF(url)
   const ref = useRef<Group>(null)
-  const { camera } = useThree()
-
-  // Auto-center & fit camera to bounding box on load
-  useEffect(() => {
-    if (!ref.current) return
-
-    const box = new Box3().setFromObject(ref.current)
-    const center = new Vector3()
-    const size = new Vector3()
-    box.getCenter(center)
-    box.getSize(size)
-
-    // Shift model so its center is at world origin
-    ref.current.position.sub(center)
-
-    // Pull camera back enough to see full model
-    const maxDim = Math.max(size.x, size.y, size.z)
-    const fov = (camera as any).fov * (Math.PI / 180)
-    const dist = Math.abs(maxDim / (2 * Math.tan(fov / 2))) * 1.5
-    camera.position.set(0, 0, dist)
-    camera.lookAt(0, 0, 0)
-    camera.updateProjectionMatrix()
-  }, [scene, camera])
 
   useFrame((_, delta) => {
     if (autoRotate && ref.current) {
@@ -45,7 +15,11 @@ function Model({ url, scale = 1, autoRotate = false }: ModelProps) {
     }
   })
 
-  return <primitive ref={ref} object={scene} scale={scale} />
+  return (
+    <Center>
+      <primitive ref={ref} object={scene} scale={scale} />
+    </Center>
+  )
 }
 
 function Loader() {
@@ -83,25 +57,25 @@ export default function ModelViewer({
   return (
     <div style={{ width, height, ...style }} className={className}>
       <Canvas
-        camera={{ position: [0, 0, 5], fov: 45, near: 0.1, far: 1000 }}
+        camera={{ position: [0, 0, 4.5], fov: 50, near: 0.01, far: 1000 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
-        <ambientLight intensity={1.0} color="#fff8f0" />
-        <directionalLight position={[5, 5, 5]} intensity={1.6} color="#ffffff" />
-        <pointLight position={[-3, 2, -2]} intensity={0.6} color="#f97316" />
-        <pointLight position={[3, 0, 3]} intensity={0.3} color="#ffe4b0" />
+        <ambientLight intensity={1.2} color="#fff8f0" />
+        <directionalLight position={[5, 5, 5]} intensity={1.8} color="#ffffff" />
+        <pointLight position={[-3, 2, -2]} intensity={0.7} color="#f97316" />
+        <pointLight position={[3, 0, 3]} intensity={0.4} color="#ffe4b0" />
 
         <Suspense fallback={<Loader />}>
           {float ? (
-            <Float speed={1.5} rotationIntensity={0.2} floatIntensity={0.4}>
+            <Float speed={1.5} rotationIntensity={0.15} floatIntensity={0.3}>
               <Model url={src} scale={scale} autoRotate={autoRotate} />
             </Float>
           ) : (
             <Model url={src} scale={scale} autoRotate={autoRotate} />
           )}
           <ContactShadows
-            position={[0, -1.2, 0]}
+            position={[0, -1.4, 0]}
             opacity={0.2}
             scale={6}
             blur={3}

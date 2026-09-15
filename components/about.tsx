@@ -43,7 +43,7 @@ export default function About() {
         borderTop: '1px solid #2a231c',
         borderBottom: '1px solid #2a231c',
         position: 'relative',
-        overflow: 'hidden',
+        overflow: 'visible',
       }}
     >
       {/* Dot grid */}
@@ -159,15 +159,20 @@ export default function About() {
             className="about-avatar"
             style={{
               display: 'flex', alignItems: 'center', justifyContent: 'center',
+              height: '520px',
               opacity: modelCol.visible ? 1 : 0,
               transform: modelCol.visible ? 'translateX(0)' : 'translateX(36px)',
               transition: 'opacity 0.7s ease 0.25s, transform 0.7s ease 0.25s',
             }}
           >
             <ModelViewer
-              src="/model.glb" width="100%" height={520}
-              scale={2.6} autoRotate={true} float={true} orbitControls={true}
-              style={{ height: '100%', minHeight: '320px' }}
+              src="/model.glb"
+              width="100%"
+              height="100%"
+              scale={2.6}
+              autoRotate={true}
+              float={true}
+              orbitControls={true}
             />
           </div>
         </div>
@@ -178,8 +183,7 @@ export default function About() {
           .about-grid { grid-template-columns: 1fr !important; }
           .about-avatar {
             width: 100% !important;
-            height: 320px !important;
-            min-height: 320px !important;
+            height: 360px !important;
           }
         }
       `}</style>
