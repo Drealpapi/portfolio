@@ -60,7 +60,7 @@ export default function ModelViewer({
   return (
     <div style={{ width, height, ...style }} className={className}>
       <Canvas
-        camera={{ position: [0, 1, 4], fov: 45 }}
+        camera={{ position: [0, 0.5, 2.2], fov: 55 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
