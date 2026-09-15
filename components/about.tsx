@@ -165,9 +165,9 @@ export default function About() {
             }}
           >
             <ModelViewer
-              src="/model.glb" width="100%" height={460}
-              scale={2.2} autoRotate={true} float={true} orbitControls={true}
-              style={{ height: '100%', minHeight: '260px' }}
+              src="/model.glb" width="100%" height={520}
+              scale={2.6} autoRotate={true} float={true} orbitControls={true}
+              style={{ height: '100%', minHeight: '300px' }}
             />
           </div>
         </div>
@@ -175,13 +175,11 @@ export default function About() {
 
       <style>{`
         @media (max-width: 768px) {
-          .about-grid {
-            grid-template-columns: 1fr !important;
-          }
+          .about-grid { grid-template-columns: 1fr !important; }
           .about-avatar {
             width: 100% !important;
-            height: 260px !important;
-            min-height: 260px !important;
+            height: 320px !important;
+            min-height: 320px !important;
           }
         }
       `}</style>

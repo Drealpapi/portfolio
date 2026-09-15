@@ -60,7 +60,7 @@ export default function ModelViewer({
   return (
     <div style={{ width, height, ...style }} className={className}>
       <Canvas
-        camera={{ position: [0, 0.5, 2.2], fov: 55 }}
+        camera={{ position: [0, 0.8, 2.8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
@@ -72,17 +72,21 @@ export default function ModelViewer({
 
         <Suspense fallback={<Loader />}>
           {float ? (
-            <Float speed={2} rotationIntensity={0.3} floatIntensity={0.8}>
-              <Model url={src} scale={scale} autoRotate={autoRotate} />
+            <Float speed={2} rotationIntensity={0.3} floatIntensity={0.5}>
+              <group position={[0, -0.3, 0]}>
+                <Model url={src} scale={scale} autoRotate={autoRotate} />
+              </group>
             </Float>
           ) : (
-            <Model url={src} scale={scale} autoRotate={autoRotate} />
+            <group position={[0, -0.3, 0]}>
+              <Model url={src} scale={scale} autoRotate={autoRotate} />
+            </group>
           )}
           <ContactShadows
-            position={[0, -1.5, 0]}
-            opacity={0.3}
-            scale={4}
-            blur={2}
+            position={[0, -1.8, 0]}
+            opacity={0.25}
+            scale={5}
+            blur={2.5}
             color="#f97316"
           />
         </Suspense>
