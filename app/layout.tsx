@@ -25,13 +25,13 @@ const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || 'https://seunlawal.dev'
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+  title: 'Lawal Abdulrahman Oluwaseun — Senior Software Developer & Cybersecurity Enthusiast',
   icons: {
     icon: '/logo.png',
     apple: '/logo.png',
   },
   description:
-    'Lawal Abdulrahman Oluwaseun (Lawal A. Oluwaseun) — Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria. Building exceptional web and mobile experiences. Specializing in React, Next.js, Node.js, and security-focused development.',
+    'Lawal Abdulrahman Oluwaseun (Lawal A. Oluwaseun) — Senior Software Developer & Cybersecurity Enthusiast based in Lagos, Nigeria. Building exceptional web, mobile, and security-focused applications. Specializing in React, Next.js, Node.js, React Native, and cybersecurity research.',
   keywords: [
     'Lawal Abdulrahman Oluwaseun',
     'Lawal A. Oluwaseun',
@@ -39,13 +39,16 @@ export const metadata: Metadata = {
     'Oluwaseun Lawal',
     'Seun Lawal',
     'seunlawal',
-    'full stack developer Nigeria',
+    'senior software developer Nigeria',
     'cybersecurity enthusiast Lagos',
-    'web developer Lagos Nigeria',
+    'software developer Lagos Nigeria',
     'React developer Nigeria',
     'Next.js developer',
     'TypeScript developer',
+    'cybersecurity researcher Nigeria',
     'blockchain security',
+    'React Native developer Nigeria',
+    'full stack developer Nigeria',
     'seunlawal.dev',
   ],
   authors: [{ name: 'Lawal Abdulrahman Oluwaseun', url: siteUrl }],
@@ -54,25 +57,25 @@ export const metadata: Metadata = {
     type: 'profile',
     locale: 'en_US',
     url: siteUrl,
-    title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+    title: 'Lawal Abdulrahman Oluwaseun — Senior Software Developer & Cybersecurity Enthusiast',
     description:
-      'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
+      'Lawal Abdulrahman Oluwaseun — Senior Software Developer & Cybersecurity Enthusiast based in Lagos, Nigeria. Building exceptional web, mobile, and security-focused applications.',
     siteName: 'Lawal Abdulrahman Oluwaseun',
     images: [
       {
         url: `${siteUrl}/profile.png`,
         width: 1254,
         height: 1254,
-        alt: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer',
+        alt: 'Lawal Abdulrahman Oluwaseun — Senior Software Developer & Cybersecurity Enthusiast',
         type: 'image/png',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
+    title: 'Lawal Abdulrahman Oluwaseun — Senior Software Developer & Cybersecurity Enthusiast',
     description:
-      'Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
+      'Senior Software Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
     images: [`${siteUrl}/profile.png`],
     creator: '@drealpapie',
   },
@@ -86,7 +89,7 @@ const jsonLd = {
   alternateName: ['Lawal A. Oluwaseun', 'Lawal Oluwaseun', 'Oluwaseun Lawal', 'Seun Lawal'],
   url: siteUrl,
   image: `${siteUrl}/profile.png`,
-  jobTitle: 'Full Stack Developer & Cybersecurity Enthusiast',
+  jobTitle: 'Senior Software Developer & Cybersecurity Enthusiast',
   worksFor: {
     '@type': 'Organization',
     name: 'Eleaders Network',

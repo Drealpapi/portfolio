@@ -4,9 +4,9 @@ import { useEffect, useRef, useState } from 'react'
 import Image from 'next/image'
 
 const roles = [
-  'Senior Full Stack Developer',
-  'React & React Native Dev',
+  'Senior Software Developer',
   'Cybersecurity Enthusiast',
+  'React & React Native Dev',
   'Problem Solver',
 ]
 

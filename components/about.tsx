@@ -105,7 +105,7 @@ export default function About() {
               Hello, I&apos;m <span style={{ color: '#fff', fontWeight: 700 }}>Lawal Ab Oluwaseun</span>.
             </p>
             <p style={{ color: '#b8b0a4', fontSize: '0.875rem', lineHeight: 1.9, fontFamily: 'inherit' }}>
-              I&apos;m a Senior Full Stack Developer based in Lagos, Nigeria, with hands-on
+              I&apos;m a Senior Software Developer &amp; Cybersecurity Enthusiast based in Lagos, Nigeria, with hands-on
               experience building modern web and mobile applications. I&apos;ve worked across
               insurance, e-commerce, service platforms, and fintech — translating business
               requirements into practical digital solutions.
