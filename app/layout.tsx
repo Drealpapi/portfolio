@@ -60,10 +60,11 @@ export const metadata: Metadata = {
     siteName: 'Lawal Abdulrahman Oluwaseun',
     images: [
       {
-        url: '/profile.png',
-        width: 800,
-        height: 800,
-        alt: 'Lawal Abdulrahman Oluwaseun',
+        url: `${siteUrl}/profile.png`,
+        width: 1254,
+        height: 1254,
+        alt: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer',
+        type: 'image/png',
       },
     ],
   },
@@ -72,7 +73,8 @@ export const metadata: Metadata = {
     title: 'Lawal Abdulrahman Oluwaseun — Full Stack Developer & Cybersecurity Enthusiast',
     description:
       'Full Stack Developer & Cybersecurity Enthusiast based in Lagos, Nigeria.',
-    images: ['/profile.png'],
+    images: [`${siteUrl}/profile.png`],
+    creator: '@drealpapie',
   },
 }
 
